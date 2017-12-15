@@ -25,6 +25,14 @@
 	</properties>
 
 	<dependencies>
+		<!--<dependency>
+			&lt;!&ndash; 不使用spring-boot-starter-parent指定的版本，但可以使用scope=import来保持依赖关系管理 &ndash;&gt;
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-dependencies</artifactId>
+			<version>1.5.9.RELEASE</version>
+			<type>pom</type>
+			<scope>import</scope>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
