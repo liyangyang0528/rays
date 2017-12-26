@@ -14,6 +14,7 @@ public class RaysApplication {
 
 	public static void main(String[] args) {
 
+
 		SpringApplication.run(RaysApplication.class, args);
 	}
 }
