@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.pattern.Decorator;
+package com.lyyco.rays.service.pattern.decorator;
 
 /**
  * 调料类-一个抽象的装饰类

@@ -1,8 +1,4 @@
-package com.lyyco.rays.service.pattern.Decorator;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
-import java.io.FilterInputStream;
+package com.lyyco.rays.service.pattern.decorator;
 
 /**
  * Created by lyy on 2018/1/23.

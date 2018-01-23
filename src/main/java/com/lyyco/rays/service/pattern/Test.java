@@ -1,6 +1,6 @@
 package com.lyyco.rays.service.pattern;
 
-import com.lyyco.rays.service.pattern.Decorator.LowerCaseInputStream;
+import com.lyyco.rays.service.pattern.decorator.LowerCaseInputStream;
 
 import java.io.*;
 

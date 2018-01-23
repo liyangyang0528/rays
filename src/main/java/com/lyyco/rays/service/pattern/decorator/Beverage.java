@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.pattern.Decorator;
+package com.lyyco.rays.service.pattern.decorator;
 
 /**
  * 饮料类
