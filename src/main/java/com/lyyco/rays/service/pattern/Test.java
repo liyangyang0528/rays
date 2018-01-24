@@ -1,6 +1,8 @@
 package com.lyyco.rays.service.pattern;
 
 import com.lyyco.rays.service.pattern.decorator.LowerCaseInputStream;
+import com.lyyco.rays.service.pattern.factory.NYStylePizzaStore;
+import com.lyyco.rays.service.pattern.factory.PizzaStore;
 
 import java.io.*;
 
@@ -15,5 +17,8 @@ public class Test {
             System.out.println((char)c);
         }
         in.close();
+
+        PizzaStore nyPizzaStore = new NYStylePizzaStore();
+        nyPizzaStore.orderPizza("cheese");
     }
 }
