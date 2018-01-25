@@ -12,19 +12,27 @@ import java.io.*;
  */
 public class Test {
     public static void main(String[]args) throws IOException {
+/*********装饰器模式**********/
+
 //        int c;
 //        InputStream in = new LowerCaseInputStream(new BufferedInputStream(new FileInputStream("test.txt")));
 //        while((c = in.read())>=0){
 //            System.out.println((char)c);
 //        }
 //        in.close();
-//
+
+/*********工厂模式*************/
+
 //        PizzaStore nyPizzaStore = new NYStylePizzaStore();
 //        nyPizzaStore.orderPizza("cheese");
-
+/*********代理模式**************/
+        //1.静态代理---目标对象
         UserDao target = new UserDao();
         System.out.println(target.getClass());
+        //代理对象---将目标对象传递给代理对象，建立代理关系
         UserDaoProxy proxy = new UserDaoProxy(target);
+        System.out.println(proxy.getClass());
+        //执行代理的方法
         proxy.save();
 
         //给目标对象创建代理对象
