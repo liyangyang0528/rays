@@ -1,6 +1,5 @@
 package com.lyyco.rays;
 
-import com.lyyco.rays.web.config.ConfigBean;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +10,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableTransactionManagement
-@EnableConfigurationProperties({ConfigBean.class})
+//@EnableConfigurationProperties({ConfigBean.class})
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class RaysApplication {
 
