@@ -1,5 +1,7 @@
 package com.lyyco.rays.service.concurrent;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.util.concurrent.*;
 
 /**
@@ -56,8 +58,18 @@ public class ThreadPoolDemo {
             System.out.println(Thread.currentThread().getName() + ", every 3s");
         },2,3,TimeUnit.SECONDS);
 
+        /*
+        创建线程池
+         */
+        LinkedBlockingDeque blockingDeque = new LinkedBlockingDeque();
+        ThreadPoolExecutor threadPoolExecutors = new ThreadPoolExecutor(5,10,
+                1000L,TimeUnit.MINUTES,
+                new LinkedBlockingDeque<Runnable>(),
+                new ThreadFactoryBuilder().setNameFormat("XX-task-%d").build());
+        threadPoolExecutors.execute(()->{
 
-}
+        });
+    }
 public static void main(String[]args){
         ThreadPoolDemo demo = new ThreadPoolDemo();
         demo.threadPool();
