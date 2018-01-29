@@ -1,0 +1,454 @@
+{
+	"variables": [],
+	"info": {
+		"name": "BanMaTrip",
+		"_postman_id": "a7c19735-77a4-f038-9058-c0d7a69dfa9a",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "携程真服-静态信息",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/OTA_HotelDescriptiveInfo.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					},
+					{
+						"key": "",
+						"value": "",
+						"description": "",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request xmlns=\"http://ctrip.com/\">\r\n      <requestXML>\r\n<![CDATA[<Request xmlns=\"http://www.opentravel.org/OTA/2003/05\">\r\n\t\t<Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"OTA_HotelDescriptiveInfo\" Signature=\"61F0847A40CE629A3E1085AC24AAA3B8\"/>\r\n\t\t  <HotelRequest>\r\n\t\t\t<RequestBody>\r\n\t\t\t  <OTA_HotelDescriptiveInfoRQ Version=\"1.0\" xmlns=\"http://www.opentravel.org/OTA/2003/05\">\r\n\t\t\t\t<HotelDescriptiveInfos>\r\n\t\t\t\t\t<HotelDescriptiveInfo HotelCode=\"2640245\">\r\n\t\t\t\t\t\t<HotelInfo SendData=\"true\"/>\r\n\t\t\t\t\t\t<FacilityInfo SendGuestRooms=\"true\"/>\r\n\t\t\t\t\t\t<AreaInfo SendAttractions=\"true\" SendRecreations=\"true\"/>\r\n\t\t\t\t\t\t<ContactInfo SendData=\"true\"/>\r\n\t\t\t\t\t\t<MultimediaObjects SendData=\"true\"/>\r\n\t\t\t\t\t</HotelDescriptiveInfo>\r\n\t\t\t\t</HotelDescriptiveInfos>\r\n\t\t\t  </OTA_HotelDescriptiveInfoRQ>\r\n\t\t\t</RequestBody>\r\n\t\t\t</HotelRequest>\r\n\t\t</Request>]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "酒店静态信息查询"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-全量酒店ID",
+			"request": {
+				"url": {
+					"raw": "https://sopenservice.ctrip.com/openservice/serviceproxy.ashx?aid=696873&sid=1234397&icode=e6fb53910a134cdd96fc4ba30f864c7d&token=5880b28ff4cf41be9346f01104cfb294&mode=1&format=json",
+					"protocol": "https",
+					"host": [
+						"sopenservice",
+						"ctrip",
+						"com"
+					],
+					"path": [
+						"openservice",
+						"serviceproxy.ashx"
+					],
+					"query": [
+						{
+							"key": "aid",
+							"value": "696873",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "sid",
+							"value": "1234397",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "icode",
+							"value": "e6fb53910a134cdd96fc4ba30f864c7d",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "token",
+							"value": "5880b28ff4cf41be9346f01104cfb294",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "mode",
+							"value": "1",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "format",
+							"value": "json",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"City\":\"228\",\n\t\"PageIndex\":\"1\",\n\t\"PageSize\":\"5000\"\n}"
+				},
+				"description": "根据citycode查询该城市下所有的hotelID"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-价格计划",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/OTA_HotelRatePlan.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request xmlns=\"http://ctrip.com/\">\r\n      <requestXML>\r\n<![CDATA[\r\n<Request  xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\">\r\n  <Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"OTA_HotelRatePlan\" Signature=\"3D2AF7E3435D1CA33D3B7EA0C7FD08A9\"/>\r\n  <HotelRequest>\r\n    <RequestBody>\r\n      <ns:OTA_HotelRatePlanRQ TimeStamp=\"2013-06-01T00:00:00.000+08:00\" Version=\"3.0\" >\r\n        <ns:RatePlans>\r\n          <ns:RatePlan>\r\n            <ns:DateRange Start=\"2018-02-01\" End=\"2018-02-02\"/>\r\n            <ns:RatePlanCandidates> \r\n              <ns:RatePlanCandidate AvailRatesOnlyInd=\"true\" IsCNYCurrency=\"true\">\r\n                <ns:HotelRefs>\r\n                  <ns:HotelRef HotelCode=\"998283\"/>\r\n                </ns:HotelRefs>\r\n              </ns:RatePlanCandidate>\r\n            </ns:RatePlanCandidates>\r\n            <ns:TPA_Extensions RestrictedDisplayIndicator=\"true\"/>\r\n          </ns:RatePlan>\r\n        </ns:RatePlans>\r\n      </ns:OTA_HotelRatePlanRQ>\r\n    </RequestBody>\r\n  </HotelRequest>\r\n</Request>]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "价格计划查询"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-静态增量",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/GetHotelInfoIncrement.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns=\"http://ctrip.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request>\r\n      <requestXML>\r\n<![CDATA[\r\n<Request>\r\n\t\t<Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"PaymentMerchantPay\" Signature=\"1B9FC64F044C0E3CE4A8C47C2CF838C2\"/>\r\n\t\t<GetHotelInfoIncrementRequest>\r\n\t\t<StartTime>2018-01-12T13:35:00</StartTime>\r\n\t\t<EndTime>2018-01-12T14:05:00</EndTime>\r\n\t\t</GetHotelInfoIncrementRequest>\r\n\t\t</Request>\r\n\t\t]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "静态信息增量查询"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-可订检查",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/OTA_HotelAvail.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request xmlns=\"http://ctrip.com/\">\r\n      <requestXML>\r\n<![CDATA[\r\n\t  <Request>\r\n\t\t<Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"OTA_HotelAvail\" Signature=\"EE27B0988F993CF0F531BD25D95E9C65\"/>\r\n\t\t  <HotelRequest>\r\n\t\t\t<RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n\t\t\t\t <ns:OTA_HotelAvailRQ Version=\"3.1\" TimeStamp=\"2017-11-28T00:00:00.000+08:00\">\r\n        <ns:AvailRequestSegments>\r\n          <ns:AvailRequestSegment>\r\n            <ns:HotelSearchCriteria>\r\n              <ns:Criterion>\r\n                <ns:HotelRef HotelCode=\"994990\"/>\r\n                <ns:StayDateRange Start=\"2018-01-23T00:00:00.000+08:00\" End=\"2018-01-25T00:00:00.000+08:00\"/>\r\n                <ns:RatePlanCandidates>\r\n                  <ns:RatePlanCandidate RatePlanCode=\"58295107\" RatePlanCategory=\"502\"/>\r\n                </ns:RatePlanCandidates>\r\n                <ns:RoomStayCandidates>\r\n                  <ns:RoomStayCandidate Quantity=\"100\">\r\n                    <ns:GuestCounts IsPerRoom=\"false\">\r\n                    \r\n                      <ns:GuestCount Count=\"100\"/>\r\n                    </ns:GuestCounts>\r\n                  </ns:RoomStayCandidate>\r\n                </ns:RoomStayCandidates>\r\n                <ns:TPA_Extensions>\r\n                  <ns:LateArrivalTime>2018-01-23T18:00:00</ns:LateArrivalTime>\r\n                </ns:TPA_Extensions>\r\n              </ns:Criterion>\r\n            </ns:HotelSearchCriteria>\r\n          </ns:AvailRequestSegment>\r\n        </ns:AvailRequestSegments>\r\n      </ns:OTA_HotelAvailRQ>\r\n      </RequestBody>\r\n      </HotelRequest>\r\n      </Request>\r\n\t\t]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "可订查询"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-用户生成",
+			"request": {
+				"url": "http://openapi.ctrip.com/Tuan/OTA_UserUniqueID.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<soap:Envelope  xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\n  <soap:Body>\n    <Request xmlns=\"http://ctrip.com/\">\n      <requestXML>\n<![CDATA[\n<Request>\n  <Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"OTA_UserUniqueID\" Signature=\"A63716BCEBEEA2755C9A8549E787D482\"/>\n  <UserRequest>\n\t<AllianceID>696873</AllianceID>\n\t<SID>1234397</SID>\n\t<UidKey>FE6DFBB5-6A4F-4BC2-A918-DDBFCE30F1C5</UidKey>\n  </UserRequest>\n</Request>\n\t]]>\n\t  </requestXML>\n    </Request>\n  </soap:Body>\n</soap:Envelope>\n"
+				},
+				"description": "用户生成调用接口"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-订单保存",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/OTA_HotelResSave.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns=\"http://ctrip.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request>\r\n      <requestXML>\r\n\t\t<![CDATA[\r\n\t\t<Request>\r\n\t\t\t<Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1509679923\"  RequestType=\"OTA_HotelResSave\" Signature=\"42CAD1BA1AD98A93D9D5D09F7B43CC92\"/>\r\n<HotelRequest>\r\n <RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n      <ns:OTA_HotelResSaveRQ TimeStamp=\"2015-11-02T12:00:32.351+08:00\" Version=\"1.0\">\r\n        <ns:UniqueID ID=\"2017110801\" Type=\"504\"/>\r\n        <ns:UniqueID Type=\"28\" ID=\"696873\"/>\r\n        <ns:UniqueID Type=\"503\" ID=\"1234397\"/>\r\n        <ns:UniqueID Type=\"1\" ID=\"a25fc030-2a88-49fa-8561-b8ed40fc369d\"/>\r\n        <ns:HotelReservations>\r\n          <ns:HotelReservation>\r\n            <ns:RoomStays>\r\n              <ns:RoomStay>\r\n                <ns:RoomTypes>\r\n                  <ns:RoomType NumberOfUnits=\"1\"/>\r\n                </ns:RoomTypes>\r\n                <ns:RatePlans>\r\n                  <ns:RatePlan RatePlanCode=\"78191453\" RatePlanCategory=\"501\" PrepaidIndicator=\"true\" RatePlanID=\"1666222902\" BookingCode=\"78191453\"/>\r\n                </ns:RatePlans>\r\n                <ns:BasicPropertyInfo HotelCode=\"1572622\"/>\r\n              </ns:RoomStay>\r\n            </ns:RoomStays>\r\n            <ns:ResGuests>\r\n              <ns:ResGuest ArrivalTime=\"00:00:00+08:00\">\r\n                <ns:Profiles>\r\n                  <!--客人简介-->\r\n                  <ns:ProfileInfo>\r\n                    <ns:Profile>\r\n                      <!--客人详细简介列表-->\r\n                      <ns:Customer>\r\n                        <!--入住人姓名-->\r\n                        <ns:PersonName>\r\n                          <!--姓名-->\r\n                          <ns:Surname>test/test</ns:Surname>\r\n                        </ns:PersonName>\r\n                        <!--联系人-->\r\n                        <!-- ContactType属性：确认联系人方式，sms短信确认；string类型；必填 -->\r\n                        <ns:ContactPerson ContactType=\"sms\">\r\n                          <!--联系人姓名-->\r\n                          <ns:PersonName>\r\n                            <ns:Surname>testa/testa</ns:Surname>\r\n                          </ns:PersonName>\r\n                          <!--联系电话-->\r\n                          <!-- PhoneNumber属性：联系电话；string类型；必填 -->\r\n                          <!-- PhoneTechType属性：电话类型，参考CodeList(PTT)；string类型；可空-->\r\n                          <ns:Telephone PhoneNumber=\"15215487888\" PhoneTechType=\"5\"/>\r\n                          <!-- Email地址 预付房型必填项-->\r\n                          <ns:Email>test@ctrip.com</ns:Email>\r\n                        </ns:ContactPerson>\r\n                      </ns:Customer>\r\n                    </ns:Profile>\r\n                  </ns:ProfileInfo>\r\n                </ns:Profiles>\r\n                <!--其他信息-->\r\n                <ns:TPA_Extensions>\r\n                  <!--入住人最晚到店时间：有可能最晚到店日期为第二天凌晨，格式为 yyyy-MM-dd hh:mm:ss；datetime类型；必填 -->\r\n                  <ns:LateArrivalTime>2017-12-11T00:00:00.000+08:00</ns:LateArrivalTime>\r\n                </ns:TPA_Extensions>\r\n              </ns:ResGuest>\r\n            </ns:ResGuests>\r\n            <!--入住全局信息，必填-->\r\n            <ns:ResGlobalInfo>\r\n              <!--客人数量信息-->\r\n              <!-- IsPerRoom属性：客人数量是否对应每间房，False 表示所有房间加起来一共住这么多客人；bool类型；可空 -->\r\n              <ns:GuestCounts IsPerRoom=\"false\">\r\n                <!--客人数量-->\r\n                <!-- Count属性：客人数量，1to999；numberic类型；必填 -->\r\n                <ns:GuestCount Count=\"1\"/>\r\n              </ns:GuestCounts>\r\n              <!--预订入住\\离店时间-->\r\n              <!-- Start属性：入住开始时间；datetime类型；必填 -->\r\n              <!-- End属性：入住结束时间；datetime类型；必填 -->\r\n              <ns:TimeSpan Start=\"2017-12-11T00:00:00.000+08:00\" End=\"2017-12-12T00:00:00.000+08:00\"/>\r\n              <!--订单总价 (AmountBeforeTax属性：税前订单总价；Money类型；必填) (CurrencyCode属性：货币单位；string类型；可空，注意，港澳台及海外酒店需要传入相应币种)-->\r\n              <ns:Total AmountBeforeTax=\"3400\" CurrencyCode=\"CNY\"/>\r\n            </ns:ResGlobalInfo>\r\n          </ns:HotelReservation>\r\n        </ns:HotelReservations>\r\n      </ns:OTA_HotelResSaveRQ>\r\n    </RequestBody>\r\n</HotelRequest>\r\n\t\t</Request>\r\n\t\t]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "订单保存接口"
+			},
+			"response": []
+		},
+		{
+			"name": "携程真服-订单提交",
+			"request": {
+				"url": "http://openapi.ctrip.com/Hotel/OTA_HotelResSubmit.asmx",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "text/xml",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<soap:Envelope xmlns=\"http://ctrip.com/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">\r\n  <soap:Body>\r\n    <Request>\r\n      <requestXML>\r\n\t\t<![CDATA[\r\n\t\t<Request>\r\n\t\t\t<Header  AllianceID=\"696873\" SID=\"1234397\" TimeStamp=\"1510130888\"  RequestType=\"OTA_HotelResSubmit\" Signature=\"54ACDAF4D8455189D5B724346604F2EB\"/>\r\n\t\t\t<HotelRequest>\r\n    <RequestBody xmlns:ns=\"http://www.opentravel.org/OTA/2003/05\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\r\n      <ns:OTA_HotelResSubmitRQ TransactionIdentifier=\"111614081515000002107\" TimeStamp=\"2001-12-17T09:30:47.0Z\" Version=\"1.0\" PrimaryLangID=\"zh\">\r\n        <ns:ReservationPayment>\r\n          <!--提交的携程订单号-->\r\n          <ns:ReservationID Type=\"501\" ID=\"4816860865\"/>\r\n          <!--支付信息 PaymentType(5:信用卡；8：押金担保；9：分销商收款）GuaranteeIndicator：是否担保;GuaranteeTypeCode:(1:峰时担保;2:全额担保;3:超时担保;4:一律担保;5:手机担保;)-->\r\n          <ns:PaymentDetail PaymentType=\"9\" GuaranteeIndicator=\"true\" GuaranteeTypeCode=\"4\">\r\n            <!--预付支付-->\r\n            <ns:ChannelAccount ChannelAccountIndicator=\"true\"/>\r\n            <!--支付金额-->\r\n            <ns:PaymentAmount CurrencyCode=\"CNY\" Amount=\"7248.00\"/>\r\n          </ns:PaymentDetail>\r\n        </ns:ReservationPayment>\r\n      </ns:OTA_HotelResSubmitRQ>\r\n    </RequestBody>\r\n  </HotelRequest>\r\n\t\t\t\r\n\t\t\t\r\n\t\t\t\r\n\t\t</Request>]]>\r\n\t  </requestXML>\r\n    </Request>\r\n  </soap:Body>\r\n</soap:Envelope>"
+				},
+				"description": "订单提交接口"
+			},
+			"response": []
+		},
+		{
+			"name": "本地测试-价格计划",
+			"request": {
+				"url": "localhost:8099/hotel/rescRatePlan",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hotelCode\":\"700876\",\n\t\"startDate\":\"2018-02-01\",\n\t\"endDate\":\"2018-02-02\"\n}"
+				},
+				"description": "本地测试"
+			},
+			"response": []
+		},
+		{
+			"name": "ota测服-价格计划",
+			"request": {
+				"url": "180.167.23.130:7001/hotel/rescRatePlan\n",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"hotelCode\":\"993892\",\n\t\"startDate\":\"2018-02-01\",\n\t\"endDate\":\"2018-02-02\"\n}"
+				},
+				"description": "本地测试"
+			},
+			"response": []
+		},
+		{
+			"name": "本地测试-可订检查",
+			"request": {
+				"url": "localhost:8099/hotel/rescAvailHotel",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hotelCode\":\"1572622\",\r\n    \"startDate\":\"2018-01-17\",\r\n    \"endDate\":\"2018-01-20\",\r\n    \"ratePlanCode\":\"44171784\",\r\n    \"ratePlanCategory\":\"501\",\r\n    \"ratePlanId\":\"1504439501\",\r\n    \"bookingCode\":\"44171784\",\r\n    \"roomCount\":\"1\",\r\n    \"guestCount\":\"1\",\r\n    \"lateArrivalTime\":\"2018-01-17 18:00:00\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "ota测服-可订检查",
+			"request": {
+				"url": "180.167.23.130:7001/hotel/rescAvailHotel",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hotelCode\":\"993892\",\r\n    \"startDate\":\"2018-02-01\",\r\n    \"endDate\":\"2018-02-02\",\r\n    \"ratePlanCode\":\"13480801\",\r\n    \"ratePlanCategory\":\"501\",\r\n    \"roomCount\":\"1\",\r\n    \"guestCount\":\"1\",\r\n    \"lateArrivalTime\":\"2018-02-01 8:00:00\"\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "启动测服静态信息",
+			"request": {
+				"url": "http://172.16.1.17:8099/hotel/static",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"idList\":\"5078002490\"\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PHP测服静态插入服务",
+			"request": {
+				"url": {
+					"raw": "http://admintest.banma_cefu.com:8080/index.php?m=orangeapi&c=resource&a=insertHotel",
+					"protocol": "http",
+					"host": [
+						"admintest",
+						"banma_cefu",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "m",
+							"value": "orangeapi",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "c",
+							"value": "resource",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "a",
+							"value": "insertHotel",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"hotel_info\": [\r\n        {\r\n            \"name\": \"首尔菲尔斯塔明洞中心酒店(Philstay Myeongdong Central Hotel)\",\r\n            \"address\": \"38-1, Myeong-dong 1-ga\",\r\n            \"ctrip_hotel_id\": 5599636,\r\n            \"district_name_1\": \"韩国\",\r\n            \"district_name_2\": \"首尔\",\r\n            \"district_name_3\": \"市厅/明洞\",\r\n            \"ctrip_star_level\": \"银牌\",\r\n            \"ctrip_appraise_level\": \"2\",\r\n            \"check_in_time\": \"15:00:00\",\r\n            \"check_out_time\": \"11:00:00\",\r\n            \"book_limit\": \"入住时间：15:00-23:30      离店时间：07:00-11:00不同类型的客房附带不同的取消预订和预先付费政策 选择上述客房时，请参阅“客房政策”若提前离店，酒店将收取一定的费用入住时需要出示政府核发的身份证件(带照片)。请携带信用卡和现金用以支付押金或额外费用。不可携带宠物。信用卡授权解除需时1-3个月。视不同国家、城市之银行操作时间而定。海外酒店（包括港澳台）酒店已确认的订单，如在最晚取消时间前取消订单，并再重新预订，酒店可能会拒绝使用新价格。不接受18岁以下客人单独入住。0-7岁儿童使用现有床铺免费，不含儿童早餐。不接受18岁以下客人在无监护人陪同的情况下入住\\n7岁以上的儿童一律按照成人标准100.00%收费加床政策、儿童人数请参见您所选定的客房政策，若超过房型限定人数，可能需收取额外费用。提出的任何要求均需获得酒店的确认，所有服务详情以酒店告知为准。酒店不提供早餐\"\r\n        }\r\n    ],\r\n    \"all_room_info\": [\r\n        {\r\n            \"name\": \"豪华房(双床) \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729010\",\r\n            \"basic_room_name\": \"豪华房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"豪华房(双床) \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729011\",\r\n            \"basic_room_name\": \"豪华房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准房(双床) \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729012\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准房(双床) \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729013\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"经济双床间 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729014\",\r\n            \"basic_room_name\": \"经济房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"经济双床间 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729015\",\r\n            \"basic_room_name\": \"经济房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"三人房\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729016\",\r\n            \"basic_room_name\": \"三人房\",\r\n            \"bed_type_name\": \"多张床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 3,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"三人房\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729017\",\r\n            \"basic_room_name\": \"三人房\",\r\n            \"bed_type_name\": \"多张床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 3,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"经济双床间\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729018\",\r\n            \"basic_room_name\": \"经济房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"经济双床间\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729019\",\r\n            \"basic_room_name\": \"经济房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"豪华房(双床)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729020\",\r\n            \"basic_room_name\": \"豪华房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"豪华房(双床)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729021\",\r\n            \"basic_room_name\": \"豪华房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729022\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729023\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729024\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729025\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准房(双床)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729026\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准房(双床)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729027\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 2,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"三人房 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729106\",\r\n            \"basic_room_name\": \"三人房\",\r\n            \"bed_type_name\": \"多张床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 3,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"三人房 \",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"35729107\",\r\n            \"basic_room_name\": \"三人房\",\r\n            \"bed_type_name\": \"多张床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 3,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"三人房 (单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355681\",\r\n            \"basic_room_name\": \"三人房\",\r\n            \"bed_type_name\": \"多张床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准房(双床)(单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355682\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间(单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355683\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"标准双人间 (单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355685\",\r\n            \"basic_room_name\": \"标准房\",\r\n            \"bed_type_name\": \"大床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"豪华房(双床)(单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355687\",\r\n            \"basic_room_name\": \"豪华房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        },\r\n        {\r\n            \"name\": \"经济双床间(单人入住)\",\r\n            \"description\": \"\",\r\n            \"ctrip_room_id\": \"43355688\",\r\n            \"basic_room_name\": \"经济房\",\r\n            \"bed_type_name\": \"双床\",\r\n            \"add_bed_type\": 0,\r\n            \"add_bed_num\": 0,\r\n            \"with_breakfast\": 0,\r\n            \"breakfast_num\": 0,\r\n            \"extra_breakfast_num\": 0,\r\n            \"extra_luncheonNum_num\": 0,\r\n            \"extra_dinner_num\": 0,\r\n            \"promotion_type_id\": 0,\r\n            \"adult_count\": 1,\r\n            \"vender_id\": 430\r\n        }\r\n        ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "PHP测服静态上下架服务",
+			"request": {
+				"url": {
+					"raw": "http://admintest.banma_cefu.com:8080/index.php?m=orangeapi&c=resource&a=insertHotel",
+					"protocol": "http",
+					"host": [
+						"admintest",
+						"banma_cefu",
+						"com"
+					],
+					"port": "8080",
+					"path": [
+						"index.php"
+					],
+					"query": [
+						{
+							"key": "m",
+							"value": "orangeapi",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "c",
+							"value": "resource",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "a",
+							"value": "insertHotel",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"change_room_arr\": [\n        {\n            \"ctrip_room_id\": \"136921759\",\n            \"resource_Id\": \"1974667\",\n            \"delete_flag\": \"2\"\n        }\n    ]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "本地测试-订单取消",
+			"request": {
+				"url": "localhost:8099/hotel/cancelOrder",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"orderId\":\"5078002490\",\n\t\"reasons\":[{\"type\":\"506\"}]\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
