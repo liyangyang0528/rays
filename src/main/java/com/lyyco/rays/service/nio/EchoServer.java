@@ -40,13 +40,16 @@ public class EchoServer {
                 b.group(group)
                         //specifies the use of an NIO Transport Channel type
                         .channel(NioServerSocketChannel.class)
-                        //set the local address to an InetSocketAddress with the port
-                        //after this the server will bind to this address to listen for new connection requests
+                        /*
+                        set the local address to an InetSocketAddress with the port
+                        after this the server will bind to this address to listen for new connection requests
+                        */
                         .localAddress(new InetSocketAddress(port))
-                        //channelInitializer---when a new connection is accepeted,
-                        //a new child Channel will be created
-                        //and the method-ChannelInitializer will add an instance of
-                        // your EchoServerHandler to the Channel's ChannelPipeline
+                        /*channelInitializer---when a new connection is accepeted,
+                          a new child Channel will be created
+                          and the method-ChannelInitializer will add an instance of
+                          your EchoServerHandler to the Channel's ChannelPipeline
+                          */
                         .childHandler(new ChannelInitializer<SocketChannel>() {
                             @Override
                             protected void initChannel(SocketChannel socketChannel) throws Exception {

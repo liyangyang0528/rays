@@ -11,7 +11,7 @@ import io.netty.util.CharsetUtil;
 /**
  * Created by lyy on 2018/2/13.
  */
-@ChannelHandler.Sharable//标志可以被多个线程共享
+@ChannelHandler.Sharable//标志可以被多个channel共享
 public class EchoServerHandler extends ChannelInboundHandlerAdapter{
 
     @Override
