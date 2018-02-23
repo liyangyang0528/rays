@@ -4,7 +4,7 @@
 1.研读《java8 in action》对java8的Stream,lambda进行了研究与编码,
 借此体会behavior-parameteriza,functional-style-data的编程思想
 
-2.《netty in action》以及https://netty.io官方文档,尝试使用netty
+2.《netty in action》以及https://netty.io  官方文档,尝试使用netty
 
 3.《redis in action》
 
