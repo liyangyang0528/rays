@@ -31,7 +31,7 @@ public class AppleApp {
 
 
     public static void main(String[]args){
-
+        //TODO  nice!
         BiFunction<String,Integer,Apple> c1 = Apple::new;
         //等同于下面的;调用apply方法会将color,weight应用到右边的lambda，并返回Apple
         BiFunction<String,Integer,Apple> c2 = (color,weight)-> new Apple(color,weight);

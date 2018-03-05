@@ -1,7 +1,10 @@
 package com.lyyco.rays.service.lambda;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -35,5 +38,20 @@ public class StreamTest {
 
         Stream<String> stream = Stream.of("java8","Lambda");
         stream.map(String::toUpperCase).forEach(System.out::println);
+
+        Map<Integer,String> dateList = new HashMap<>(16);
+
     }
+    public long measureSumPerf(Function<Long,Long> adder, long n){
+        long fastest = Long.MAX_VALUE;
+        for(int i = 0; i< 10; i++){
+            long start = System.nanoTime();
+            long sum = adder.apply(n);
+            long duration = (System.nanoTime()-start)/1_000_000;
+            System.out.println("Result:"+sum);
+            if(duration < fastest) fastest = duration;
+        }
+        return fastest;
+    }
+
 }
