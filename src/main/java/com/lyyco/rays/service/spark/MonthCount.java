@@ -149,8 +149,8 @@ public class MonthCount {
 	 public static void main(String[] args) throws Exception {
 		 // 设置目录
 			args = new String[] {
-				"D:\\test",
-				"D:\\test\\output"
+				"D:\\usr\\spark",
+				"D:\\usr\\spark\\output"
 			};
 			
 			Configuration conf = new Configuration();
@@ -165,7 +165,7 @@ public class MonthCount {
 			job.setJarByClass(MonthCount.class);
 			job.setMapperClass(ReduceJoinByCartesianProductMapper.class);
 			job.setReducerClass(ReduceJoinByCartesianProductReducer.class);
-			// reduce�ĸ�������Ϊ1
+			// reduce
 	        job.setNumReduceTasks(1);
 	        
 			job.setMapOutputKeyClass(Text.class);
