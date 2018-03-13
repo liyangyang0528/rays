@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
@@ -66,7 +67,28 @@ public class LambdaTest {
                         .map(j -> new int[] {i,j}))
                         .collect(toList());
 
+        IntStream evenNumbers = IntStream.rangeClosed(1,100)
+                .filter(n -> n % 2==0);
+        //求勾股数
+        Stream<int[]> pythagoreanTriples = IntStream.rangeClosed(1,100).boxed()
+                .flatMap(a ->
+                        IntStream.rangeClosed(a,100)
+                                .filter(b -> Math.sqrt(a*a + b*b) % 1 == 0)
+                                .mapToObj(b ->
+                                        new int[]{a,b, (int) Math.sqrt(a*a + b*b)})
+                );
 
+        pythagoreanTriples.limit(5).forEach(t -> System.out.println(t[0]+","+t[1]+","+t[2]));
+       //自己创建流
+        Stream<String> streStr = Stream.of("java8","lambda","in","action");
+        Stream.iterate(0,n->n+2)
+                .limit(10)
+                .forEach(System.out::println);
+        //生成斐波那契数
+        Stream.iterate(new int[]{0,1},
+                t -> new int[]{t[1],t[0]+t[1]})
+                .limit(20)
+                .forEach(t -> System.out.println("("+t[0]+","+t[1]+")"));
 
 
 
