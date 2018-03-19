@@ -17,16 +17,21 @@ public class EchoClient {
     private final String host;
     private final int port;
 
-    public EchoClient(String host,int port){
+    public EchoClient(String host, int port) {
         this.host = host;
         this.port = port;
     }
-    public void start(){
+
+    public void start() {
         EventLoopGroup group = new NioEventLoopGroup();
         Bootstrap b = new Bootstrap();
         b.group(group)
+                /*
+                Specifies EventLoopGroup to handle client events;
+                NIO implementation is needed.
+                 */
                 .channel(NioSocketChannel.class)
-                .remoteAddress(new InetSocketAddress(host,port))
+                .remoteAddress(new InetSocketAddress(host, port))
                 .handler(new ChannelInitializer<SocketChannel>() {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
@@ -40,7 +45,7 @@ public class EchoClient {
             f.channel().closeFuture().sync();
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             try {
                 group.shutdownGracefully().sync();
             } catch (InterruptedException e) {
@@ -49,13 +54,14 @@ public class EchoClient {
         }
     }
 
-    public static void main(String[] args){
-        if(args.length != 2){
-            System.err.println("Usage:"+ EchoClient.class.getSimpleName()+"<host> <port>");
+    public static void main(String[] args) {
+        args = new String[]{"127.0.0.1", "8081"};
+        if (args.length != 2) {
+            System.err.println("Usage:" + EchoClient.class.getSimpleName() + "<host> <port>");
             return;
         }
         String host = args[0];
         int port = Integer.parseInt(args[1]);
-        new EchoClient(host,port).start();
+        new EchoClient(host, port).start();
     }
 }
