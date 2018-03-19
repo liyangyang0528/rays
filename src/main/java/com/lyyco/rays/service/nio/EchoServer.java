@@ -21,6 +21,7 @@ public class EchoServer {
         this.port = port;
     }
     public static void main (String[]args){
+        args = new String[]{"8081"};
         if(args.length != 1) {
             System.err.print(
                     "Usage" + EchoServer.class.getSimpleName() + "<port>");
@@ -32,7 +33,8 @@ public class EchoServer {
         }
         public void start(){
             final EchoServerHandler serverHandler = new EchoServerHandler();
-            //eventLoopGroup-NioEventLoopGroup to accept and handle new connections
+            //eventLoopGroup-NioEventLoopGroup to
+            // accept and handle new connections
             EventLoopGroup group = new NioEventLoopGroup();
             try{
             //serverBootstrap
@@ -42,7 +44,8 @@ public class EchoServer {
                         .channel(NioServerSocketChannel.class)
                         /*
                         set the local address to an InetSocketAddress with the port
-                        after this the server will bind to this address to listen for new connection requests
+                        after this the server will bind to this address
+                        to listen for new connection requests
                         */
                         .localAddress(new InetSocketAddress(port))
                         /*channelInitializer---when a new connection is accepeted,

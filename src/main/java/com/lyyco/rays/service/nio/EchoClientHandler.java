@@ -21,8 +21,6 @@ public class EchoClientHandler extends SimpleChannelInboundHandler<ByteBuf>{
     sends a message
      */
     @Override
-
-
     public void channelActive(ChannelHandlerContext ctx){
         ctx.writeAndFlush(Unpooled.copiedBuffer("Netty rocks!", CharsetUtil.UTF_8));
     }
