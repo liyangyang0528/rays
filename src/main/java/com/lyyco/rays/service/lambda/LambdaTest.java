@@ -28,7 +28,8 @@ public class LambdaTest {
     public static void main(String...args) throws IOException {
 
 //        String twoLines = processFile((BufferedReader br) -> br.readLine()+br.readLine());
-
+        List<String> reduceStr = new ArrayList<>(Arrays.asList("Java8","Lambda","In","Action"));
+        String result = reduceStr.stream().reduce("",(a,b)-> a+b);
         /*
         flapMap
          */
