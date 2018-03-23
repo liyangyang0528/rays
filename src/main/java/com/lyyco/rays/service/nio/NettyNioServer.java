@@ -66,4 +66,12 @@ public class NettyNioServer {
             group.shutdownGracefully().sync();
         }
     }
+    public static void main(String...args){
+        NettyNioServer server = new NettyNioServer();
+        try {
+            server.server(8081);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }

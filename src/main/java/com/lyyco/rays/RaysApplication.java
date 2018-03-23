@@ -14,9 +14,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableAutoConfiguration(exclude = {DataSourceAutoConfiguration.class})
 public class RaysApplication {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 
-
-		SpringApplication.run(RaysApplication.class, args);
-	}
+        SpringApplication.run(RaysApplication.class, args);
+    }
 }

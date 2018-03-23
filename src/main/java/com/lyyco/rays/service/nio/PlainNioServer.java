@@ -22,6 +22,7 @@ public class PlainNioServer {
         serverChannel.configureBlocking(false);
         ServerSocket ssocket = serverChannel.socket();
         InetSocketAddress address = new InetSocketAddress(port);
+        //Binds the server to the selected port
         ssocket.bind(address);
         /*
         open the Selector for handling channels
