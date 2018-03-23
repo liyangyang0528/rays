@@ -32,6 +32,7 @@ public class GithubRepoPageProcessor implements PageProcessor{
     }
 
     public static void main(String[] args) {
+        System.setProperty("https.protocols","TLSv1");
         Spider.create(new GithubRepoPageProcessor())
                 .addPipeline(new JsonFilePipeline("D:\\usr\\webMagic"))
                 .addUrl("https://github.com/YangyangLi0528")
