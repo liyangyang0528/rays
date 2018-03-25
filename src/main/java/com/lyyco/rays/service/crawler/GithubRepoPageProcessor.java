@@ -16,8 +16,8 @@ public class GithubRepoPageProcessor implements PageProcessor{
 
     @Override
     public void process(Page page) {
-        page.addTargetRequests(page.getHtml().links().regex("(https://github\\.com/\\w+/\\w+)").all());
-        page.putField("author", page.getUrl().regex("https://github\\.com/(\\w+)/.*").toString());
+        page.addTargetRequests(page.getHtml().links().regex("(http://f.91p11\\.space/\\w+/\\w+)").all());
+        page.putField("author", page.getUrl().regex("http://f.91p11\\.space/(\\w+)/.*").toString());
         page.putField("name", page.getHtml().xpath("//h1[@class='entry-title public']/strong/a/text()").toString());
         if (page.getResultItems().get("name")==null){
             //skip this page
@@ -34,8 +34,8 @@ public class GithubRepoPageProcessor implements PageProcessor{
     public static void main(String[] args) {
         System.setProperty("https.protocols","TLSv1");
         Spider.create(new GithubRepoPageProcessor())
-                .addPipeline(new JsonFilePipeline("D:\\usr\\webMagic"))
-                .addUrl("https://github.com/YangyangLi0528")
+//                .addPipeline(new JsonFilePipeline("D:\\usr\\webMagic"))
+                .addUrl("http://f.91p11.space/index.php")
                 .thread(4).run();
     }
 
