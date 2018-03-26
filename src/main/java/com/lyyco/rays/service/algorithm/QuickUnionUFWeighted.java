@@ -1,5 +1,7 @@
 package com.lyyco.rays.service.algorithm;
 
+import java.util.Stack;
+
 /**
  * 改进
  * com.lyyco.rays.service.algorithm
