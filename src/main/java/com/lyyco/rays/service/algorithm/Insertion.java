@@ -3,7 +3,7 @@ package com.lyyco.rays.service.algorithm;
 /**
  * 插入排序
  * com.lyyco.rays.service.algorithm
- *
+ * In iteration i, swap a[i] with each larger entry to its left
  * @Author liyangyang
  * 2018/3/27
  */
@@ -27,5 +27,9 @@ public class Insertion {
         Comparable swap = a[i];
         a[i] = a[j];
         a[j] = swap;
+    }
+    public static void main(String...args){
+        Integer [] a = new Integer[]{7,10,5,3,8,4,2,9,6};
+        Insertion.sort(a);
     }
 }

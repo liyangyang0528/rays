@@ -1,9 +1,10 @@
 package com.lyyco.rays.service.algorithm;
 
-import java.util.Arrays;
 
 /**
  * 选择排序
+ * In iteration i, find index min of smallest remaining entry
+ * Swap a[i] and a[min].
  * com.lyyco.rays.service.algorithm
  * @Author liyangyang
  * 2018/3/27
@@ -30,4 +31,10 @@ public class Selection {
         a[i] = a[j];
         a[j] = swap;
     }
+
+    public static void main(String...args){
+        Integer [] a = new Integer[]{7,10,5,3,8,4,2,9,6};
+        Selection.sort(a);
+    }
+
 }

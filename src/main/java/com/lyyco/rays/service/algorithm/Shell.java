@@ -2,6 +2,8 @@ package com.lyyco.rays.service.algorithm;
 
 /**
  * 希尔排序
+ * Move entries more than one position at a time by h-sorting the array
+ *
  * The worst-case number of compares used by shellsort
  * with the 3x+1 increments is O(N 3/2).
  * Author liyangyang
@@ -33,5 +35,10 @@ public class Shell {
             //move to next increment
             h = h / 3;
         }
+    }
+
+    public static void main(String...args){
+        Integer [] a = new Integer[]{7,10,5,3,8,4,2,9,6};
+        Shell.sort(a);
     }
 }

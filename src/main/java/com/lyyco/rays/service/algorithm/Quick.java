@@ -50,5 +50,9 @@ public class Quick {
         sort(a,j+1,hi);
 
     }
+    public static void main(String...args){
+        Integer [] a = new Integer[]{7,10,5,3,8,4,2,9,6};
+        Quick.sort(a);
+    }
 
 }
