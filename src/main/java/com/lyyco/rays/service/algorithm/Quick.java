@@ -18,6 +18,13 @@ public class Quick {
         a[j] = swap;
     }
 
+    /**
+     * 找到拆分的元素
+     * @param a
+     * @param lo
+     * @param hi
+     * @return
+     */
     private static int partition(Comparable[] a, int lo, int hi) {
         int i = lo, j = hi + 1;
         while (true) {
