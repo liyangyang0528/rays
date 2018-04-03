@@ -1,0 +1,88 @@
+D:\>javap -c -v Lambda.class
+Classfile /D:/Lambda.class
+  Last modified 2018-4-3; size 1030 bytes
+  MD5 checksum 0814456859c858a2ec2fb74e4aeffa4e
+  Compiled from "Lambda.java"
+public class Lambda
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #6.#19         // java/lang/Object."<init>":()V
+   #2 = InvokeDynamic      #0:#25         // #0:apply:()Ljava/util/function/Function;
+   #3 = Fieldref           #5.#26         // Lambda.f:Ljava/util/function/Function;
+   #4 = Methodref          #6.#27         // java/lang/Object.toString:()Ljava/lang/String;
+   #5 = Class              #28            // Lambda
+   #6 = Class              #29            // java/lang/Object
+   #7 = Utf8               f
+   #8 = Utf8               Ljava/util/function/Function;
+   #9 = Utf8               Signature
+  #10 = Utf8               Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+  #11 = Utf8               <init>
+  #12 = Utf8               ()V
+  #13 = Utf8               Code
+  #14 = Utf8               LineNumberTable
+  #15 = Utf8               lambda$new$0
+  #16 = Utf8               (Ljava/lang/Object;)Ljava/lang/String;
+  #17 = Utf8               SourceFile
+  #18 = Utf8               Lambda.java
+  #19 = NameAndType        #11:#12        // "<init>":()V
+  #20 = Utf8               BootstrapMethods
+  #21 = MethodHandle       #6:#30         // invokestatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #22 = MethodType         #31            //  (Ljava/lang/Object;)Ljava/lang/Object;
+  #23 = MethodHandle       #6:#32         // invokestatic Lambda.lambda$new$0:(Ljava/lang/Object;)Ljava/lang/String;
+  #24 = MethodType         #16            //  (Ljava/lang/Object;)Ljava/lang/String;
+  #25 = NameAndType        #33:#34        // apply:()Ljava/util/function/Function;
+  #26 = NameAndType        #7:#8          // f:Ljava/util/function/Function;
+  #27 = NameAndType        #35:#36        // toString:()Ljava/lang/String;
+  #28 = Utf8               Lambda
+  #29 = Utf8               java/lang/Object
+  #30 = Methodref          #37.#38        // java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #31 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #32 = Methodref          #5.#39         // Lambda.lambda$new$0:(Ljava/lang/Object;)Ljava/lang/String;
+  #33 = Utf8               apply
+  #34 = Utf8               ()Ljava/util/function/Function;
+  #35 = Utf8               toString
+  #36 = Utf8               ()Ljava/lang/String;
+  #37 = Class              #40            // java/lang/invoke/LambdaMetafactory
+  #38 = NameAndType        #41:#45        // metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #39 = NameAndType        #15:#16        // lambda$new$0:(Ljava/lang/Object;)Ljava/lang/String;
+  #40 = Utf8               java/lang/invoke/LambdaMetafactory
+  #41 = Utf8               metafactory
+  #42 = Class              #47            // java/lang/invoke/MethodHandles$Lookup
+  #43 = Utf8               Lookup
+  #44 = Utf8               InnerClasses
+  #45 = Utf8               (Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+  #46 = Class              #48            // java/lang/invoke/MethodHandles
+  #47 = Utf8               java/lang/invoke/MethodHandles$Lookup
+  #48 = Utf8               java/lang/invoke/MethodHandles
+{
+  java.util.function.Function<java.lang.Object, java.lang.String> f;
+    descriptor: Ljava/util/function/Function;
+    flags:
+    Signature: #10                          // Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+
+  public Lambda();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=2, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: invokedynamic #2,  0              // InvokeDynamic #0:apply:()Ljava/util/function/Function;
+        10: putfield      #3                  // Field f:Ljava/util/function/Function;
+        13: return
+      LineNumberTable:
+        line 2: 0
+        line 3: 4
+}
+SourceFile: "Lambda.java"
+InnerClasses:
+     public static final #43= #42 of #46; //Lookup=class java/lang/invoke/MethodHandles$Lookup of class java/lang/invoke/MethodHandles
+BootstrapMethods:
+  0: #21 invokestatic java/lang/invoke/LambdaMetafactory.metafactory:(Ljava/lang/invoke/MethodHandles$Lookup;Ljava/lang/String;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodType;Ljava/lang/invoke/MethodHandle;Ljava/lang/invoke/MethodType;)Ljava/lang/invoke/CallSite;
+    Method arguments:
+      #22 (Ljava/lang/Object;)Ljava/lang/Object;
+      #23 invokestatic Lambda.lambda$new$0:(Ljava/lang/Object;)Ljava/lang/String;
+      #24 (Ljava/lang/Object;)Ljava/lang/String;

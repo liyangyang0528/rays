@@ -1,0 +1,91 @@
+D:\>javap -c -v InnerClass$1.class
+Classfile /D:/InnerClass$1.class
+  Last modified 2018-4-3; size 710 bytes
+  MD5 checksum 6e633c0048637fd7dd0c9415aa149449
+  Compiled from "InnerClass.java"
+class InnerClass$1 extends java.lang.Object implements java.util.function.Function<java.lang.Object, java.lang.String>
+  minor version: 0
+  major version: 52
+  flags: ACC_SUPER
+Constant pool:
+   #1 = Fieldref           #5.#23         // InnerClass$1.this$0:LInnerClass;
+   #2 = Methodref          #6.#24         // java/lang/Object."<init>":()V
+   #3 = Methodref          #6.#25         // java/lang/Object.toString:()Ljava/lang/String;
+   #4 = Methodref          #5.#26         // InnerClass$1.apply:(Ljava/lang/Object;)Ljava/lang/String;
+   #5 = Class              #27            // InnerClass$1
+   #6 = Class              #29            // java/lang/Object
+   #7 = Class              #30            // java/util/function/Function
+   #8 = Utf8               this$0
+   #9 = Utf8               LInnerClass;
+  #10 = Utf8               <init>
+  #11 = Utf8               (LInnerClass;)V
+  #12 = Utf8               Code
+  #13 = Utf8               LineNumberTable
+  #14 = Utf8               apply
+  #15 = Utf8               (Ljava/lang/Object;)Ljava/lang/String;
+  #16 = Utf8               (Ljava/lang/Object;)Ljava/lang/Object;
+  #17 = Utf8               Signature
+  #18 = Utf8               Ljava/lang/Object;Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+  #19 = Utf8               SourceFile
+  #20 = Utf8               InnerClass.java
+  #21 = Utf8               EnclosingMethod
+  #22 = Class              #31            // InnerClass
+  #23 = NameAndType        #8:#9          // this$0:LInnerClass;
+  #24 = NameAndType        #10:#32        // "<init>":()V
+  #25 = NameAndType        #33:#34        // toString:()Ljava/lang/String;
+  #26 = NameAndType        #14:#15        // apply:(Ljava/lang/Object;)Ljava/lang/String;
+  #27 = Utf8               InnerClass$1
+  #28 = Utf8               InnerClasses
+  #29 = Utf8               java/lang/Object
+  #30 = Utf8               java/util/function/Function
+  #31 = Utf8               InnerClass
+  #32 = Utf8               ()V
+  #33 = Utf8               toString
+  #34 = Utf8               ()Ljava/lang/String;
+{
+  final InnerClass this$0;
+    descriptor: LInnerClass;
+    flags: ACC_FINAL, ACC_SYNTHETIC
+
+  InnerClass$1(InnerClass);
+    descriptor: (LInnerClass;)V
+    flags:
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: putfield      #1                  // Field this$0:LInnerClass;
+         5: aload_0
+         6: invokespecial #2                  // Method java/lang/Object."<init>":()V
+         9: return
+      LineNumberTable:
+        line 3: 0
+
+  public java.lang.String apply(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/String;
+    flags: ACC_PUBLIC
+    Code:
+      stack=1, locals=2, args_size=2
+         0: aload_1
+         1: invokevirtual #3                  // Method java/lang/Object.toString:()Ljava/lang/String;
+         4: areturn
+      LineNumberTable:
+        line 6: 0
+
+  public java.lang.Object apply(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Ljava/lang/Object;
+    flags: ACC_PUBLIC, ACC_BRIDGE, ACC_SYNTHETIC
+    Code:
+      stack=2, locals=2, args_size=2
+         0: aload_0
+         1: aload_1
+         2: invokevirtual #4                  // Method apply:(Ljava/lang/Object;)Ljava/lang/String;
+         5: areturn
+      LineNumberTable:
+        line 3: 0
+}
+Signature: #18                          // Ljava/lang/Object;Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+SourceFile: "InnerClass.java"
+EnclosingMethod: #22.#0                 // InnerClass
+InnerClasses:
+     #5; //class InnerClass$1

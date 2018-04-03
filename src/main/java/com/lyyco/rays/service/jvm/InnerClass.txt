@@ -1,0 +1,61 @@
+D:\>javap -c -v InnerClass.class
+Classfile /D:/InnerClass.class
+  Last modified 2018-4-3; size 431 bytes
+  MD5 checksum db01ebc3672d6a7faf0a807ae7c6c32b
+  Compiled from "InnerClass.java"
+public class InnerClass
+  minor version: 0
+  major version: 52
+  flags: ACC_PUBLIC, ACC_SUPER
+Constant pool:
+   #1 = Methodref          #6.#18         // java/lang/Object."<init>":()V
+   #2 = Class              #19            // InnerClass$1
+   #3 = Methodref          #2.#20         // InnerClass$1."<init>":(LInnerClass;)V
+   #4 = Fieldref           #5.#21         // InnerClass.f:Ljava/util/function/Function;
+   #5 = Class              #22            // InnerClass
+   #6 = Class              #23            // java/lang/Object
+   #7 = Utf8               InnerClasses
+   #8 = Utf8               f
+   #9 = Utf8               Ljava/util/function/Function;
+  #10 = Utf8               Signature
+  #11 = Utf8               Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+  #12 = Utf8               <init>
+  #13 = Utf8               ()V
+  #14 = Utf8               Code
+  #15 = Utf8               LineNumberTable
+  #16 = Utf8               SourceFile
+  #17 = Utf8               InnerClass.java
+  #18 = NameAndType        #12:#13        // "<init>":()V
+  #19 = Utf8               InnerClass$1
+  #20 = NameAndType        #12:#24        // "<init>":(LInnerClass;)V
+  #21 = NameAndType        #8:#9          // f:Ljava/util/function/Function;
+  #22 = Utf8               InnerClass
+  #23 = Utf8               java/lang/Object
+  #24 = Utf8               (LInnerClass;)V
+{
+  java.util.function.Function<java.lang.Object, java.lang.String> f;
+    descriptor: Ljava/util/function/Function;
+    flags:
+    Signature: #11                          // Ljava/util/function/Function<Ljava/lang/Object;Ljava/lang/String;>;
+
+  public InnerClass();
+    descriptor: ()V
+    flags: ACC_PUBLIC
+    Code:
+      stack=4, locals=1, args_size=1
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: new           #2                  // class InnerClass$1 
+         8: dup
+         9: aload_0
+        10: invokespecial #3                  // Method InnerClass$1."<init>":(LInnerClass;)V
+        13: putfield      #4                  // Field f:Ljava/util/function/Function;
+        16: return
+      LineNumberTable:
+        line 2: 0
+        line 3: 4
+}
+SourceFile: "InnerClass.java"
+InnerClasses:
+     #2; //class InnerClass$1
