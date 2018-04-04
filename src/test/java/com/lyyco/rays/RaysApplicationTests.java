@@ -11,6 +11,7 @@ public class RaysApplicationTests {
 
 	@Test
 	public void contextLoads() {
+
 	}
 
 }

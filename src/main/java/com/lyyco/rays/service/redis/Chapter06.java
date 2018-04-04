@@ -617,7 +617,7 @@ public class Chapter06 {
             String chatId = seen.getElement();
             List<Map<String,Object>> messages = new ArrayList<Map<String,Object>>();
             for (String messageJson : messageStrings){
-                Map<String,Object> message = (Map<String,Object>)gson.fromJson(
+                Map<String,Object> message = gson.fromJson(
                     messageJson, new TypeToken<Map<String,Object>>(){}.getType());
                 int messageId = ((Double)message.get("id")).intValue();
                 if (messageId > seenId){
@@ -727,7 +727,7 @@ public class Chapter06 {
                 return -1;
             }
             pos++;
-            return (int)(block[0] & 0xff);
+            return block[0] & 0xff;
         }
 
         @Override

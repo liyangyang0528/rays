@@ -254,7 +254,7 @@ public class Chapter02 {
     }
 
     public interface Callback {
-        public String call(String request);
+        String call(String request);
     }
 
     public class CleanSessionsThread

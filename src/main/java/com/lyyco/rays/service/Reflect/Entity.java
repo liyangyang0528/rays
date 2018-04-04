@@ -70,7 +70,6 @@ public class Entity<E> {
         if(object instanceof String && object.toString().trim().length() ==0)return true;
         if(object.getClass().isArray() && Array.getLength(object) == 0) return true;
         if(object instanceof Collection && ((Collection<?>) object).isEmpty())return true;
-        if(object instanceof Map && ((Map<?,?>)object).isEmpty())return true;
-        return false;
+        return object instanceof Map && ((Map<?, ?>) object).isEmpty();
     }
 }
