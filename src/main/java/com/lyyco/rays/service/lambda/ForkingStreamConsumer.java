@@ -38,6 +38,9 @@ public class ForkingStreamConsumer<T> implements Consumer<T>, Results {
 
     /**
      * 将流中遍历的元素添加到所有的队列中
+     * 每当ForkingStreamConsumer接受流中的一个元素，它就会将该元素添加到BlockingQueues中
+     * 当原始流中的所有元素都添加到所有队列后,finish方法会将最后一个END_OF_STREAM元素添加到所有队列
+     * BlockingQueueSpliterators碰到最后这个END_OF_STREAM元素时就知道队列中不再有需要处理的元素了。
      * @param t
      */
     @Override

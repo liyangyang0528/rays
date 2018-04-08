@@ -19,7 +19,8 @@ public class BlockingQueueSpliterator<T> implements Spliterator<T> {
     }
 
     /**
-     * 从BlockingQueue中取得原始流中的元素，而这些元素最初由ForkingSteamConsumer添加
+     * 从BlockingQueue中取得原始流中的元素
+     * 而这些元素最初由ForkingSteamConsumer添加
      * @param action
      * @return
      */
