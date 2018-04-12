@@ -6,7 +6,7 @@ import java.util.concurrent.*;
  * Author liyangyang
  * 2018/4/11
  */
-public class FutureUseTest {
+public class FutureTest {
 
     public static void main(String[]args){
         ExecutorService executor = Executors.newCachedThreadPool();
@@ -18,6 +18,8 @@ public class FutureUseTest {
                 return doSomeLongComputation();
             }
         });
+        //上面的异步操作进行的同时执行其他工作
+        doSomeLongComputation();
 
         try {
             //获取异步操作的结果；如果最终被阻塞无法得到结果，最多等一分钟后退出
