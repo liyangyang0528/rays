@@ -32,6 +32,7 @@ public class Discount {
 
     private static String format(double v) {
 
+        return null;
     }
 
     private static void delay() {
