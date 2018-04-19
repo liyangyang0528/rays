@@ -21,8 +21,8 @@ public class Shop {
         return name;
     }
 
-    public double getPrice(String product) {
-        return calculatePrice(product);
+    public String getPrice(String product) {
+        return String.valueOf(calculatePrice(product));
     }
 
     public Future<Double> getPriceAsync(String product) {
