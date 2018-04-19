@@ -3,6 +3,7 @@ package com.lyyco.rays.service.spring;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 /**
+ * 配置前端控制器
  * configuring dispatcherServlet
  * Author liyangyang
  * 2018/4/18
