@@ -43,15 +43,15 @@ public class Discount {
                 .map(Discount::applyDiscount)
                 .collect(toList());
 
-        shops
-                .stream()
-                .map(shop -> CompletableFuture.supplyAsync(
-                          () -> shop.getPrice(product)))
-                .map(future -> future.thenApply(Quote::parse))
-                .map(future -> future.thenCompose(quote ->
-                          CompletableFuture.supplyAsync(
-                              ()-> applyDiscount(quote)))
-                  .collect(toList());
+//        shops
+//                .stream()
+//                .map(shop -> CompletableFuture.supplyAsync(
+//                          () -> shop.getPrice(product)))
+//                .map(future -> future.thenApply(Quote::parse))
+//                .map(future -> future.thenCompose(quote ->
+//                          CompletableFuture.supplyAsync(
+//                              ()-> applyDiscount(quote)))
+//                  .collect(toList());
 
 
         return null;
