@@ -17,10 +17,10 @@ import java.nio.charset.Charset;
 public class NettyOioServer {
     public void server(int port) throws InterruptedException {
         final ByteBuf buf = Unpooled.unreleasableBuffer(
-            Unpooled.copiedBuffer("HI!\r\n", Charset.forName("UTF-8"))
+                Unpooled.copiedBuffer("HI!\r\n", Charset.forName("UTF-8"))
         );
         EventLoopGroup group = new OioEventLoopGroup();
-        try{
+        try {
             //create a ServerBootstrap
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
@@ -39,8 +39,8 @@ public class NettyOioServer {
                                     Add a channelInboundHandlerAdapter to
                                     intercept and handle events
                                      */
-                                    new ChannelInboundHandlerAdapter(){
-                                        public void channelActive(ChannelHandlerContext ctx){
+                                    new ChannelInboundHandlerAdapter() {
+                                        public void channelActive(ChannelHandlerContext ctx) {
                                             ctx.writeAndFlush(buf.duplicate())
                                                     .addListener(
                                                             /*
@@ -59,7 +59,7 @@ public class NettyOioServer {
             ChannelFuture f = b.bind().sync();
             //release all resource
             f.channel().closeFuture().sync();
-        }finally {
+        } finally {
             group.shutdownGracefully().sync();
         }
     }
