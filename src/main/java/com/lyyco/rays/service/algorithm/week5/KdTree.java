@@ -149,6 +149,7 @@ public class KdTree {
         }
         return rect;
     }
+
     private void range(SET<Point2D> set, RectHV rect, Node n) {
         if (null == n || !n.rect.intersects(rect)) return;
         // 矩形块 在节点n左边或下边 有一部分
@@ -171,7 +172,6 @@ public class KdTree {
         private RectHV rect;
         private Node left;
         private Node right;
-
         private boolean coordinate;
 
         public Node(Point2D p, boolean coordinate, RectHV rect) {
