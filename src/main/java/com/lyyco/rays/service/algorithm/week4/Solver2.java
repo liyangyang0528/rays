@@ -1,175 +1,130 @@
 package com.lyyco.rays.service.algorithm.week4;
 
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.MinPQ;
+import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdOut;
 
-import java.net.URL;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Comparator;
 
-/**
- * Author liyangyang
- * 2018/4/30
- */
-public class Solver {
-    private boolean solvable;
-    private Stack<Board> solution = null;
-    private SearchNode searchNode;
-
-    private static class SearchNode implements Comparable<SearchNode> {
-        private Board board;
-        private int moves;
-        private SearchNode previous;
-
-        public SearchNode(Board board, SearchNode previous) {
-            this.board = board;
-            if (previous != null) {
-                this.moves = previous.moves++;
-                this.previous = previous;
-            } else
-                this.moves++;
-        }
-
-        @Override
-        public int compareTo(SearchNode o) {
-            return (this.board.manhattan() + this.moves)
-                    - (o.board.manhattan() + o.moves);
-        }
-    }
-
-    // find a solution to the initial board (using the A* algorithm)
-    public Solver(Board initial) {
-        MinPQ<SearchNode> nodes = new MinPQ<>();
-        MinPQ<SearchNode> twinNodes = new MinPQ<>();
-        Set<Integer> hashes = new HashSet<>();
-        Set<Integer> twinHashes = new HashSet<>();
-        SearchNode searchTwinNode;
-        Stopwatch watch = new Stopwatch();
-
-        // insert the first initial node into the priority queue
-        searchNode = new SearchNode(initial, null);
-        nodes.insert(searchNode);
-
-        // insert the first twin node into the twin priority queue
-        searchTwinNode = new SearchNode(initial.twin(), null);
-        twinNodes.insert(searchTwinNode);
-
-        // main loop
-        while (true) {
-
-            // delete MIN node
-            if (!nodes.isEmpty())
-                searchNode = nodes.delMin();
-            else
-                break;
-
-            // is goal?
-            if (searchNode.board.isGoal()) {
-                solvable = true;
-
-                break;
-            }
-
-            // parallel search to determine whether this puzzle is solvable
-            if (!twinNodes.isEmpty())
-                searchTwinNode = twinNodes.delMin();
-            else
-                break;
-
-            if (searchTwinNode.board.isGoal()) {
-                break;
-            }
-
-            // insert onto the priority queue all neighboring search nodes
-            for (Board neighbor : searchNode.board.neighbors()) {
-                // critical optimization
-                insertNeighboringSearchNodes(nodes, hashes, neighbor);
-            }
-
-            // insert onto twin priority queue all neighboring search nodes
-            for (Board neighbor : searchTwinNode.board.neighbors()) {
-                // critical optimization
-                insertNeighboringSearchNodes(twinNodes, twinHashes, neighbor);
-            }
-
-            // time limit
-            if (watch.elapsedTime() > 7) {
-                break;
-            }
-
-        }
-    }
-
-    private void insertNeighboringSearchNodes(MinPQ<SearchNode> nodes, Set<Integer> hashes, Board neighbor) {
-        int hashCode;
-        hashCode = neighbor.toString().hashCode();
-        if (!hashes.contains(hashCode)) {
-            nodes.insert(new SearchNode(neighbor, searchNode));
-            hashes.add(hashCode);
-            // inserts++;
-        }
-    }
-
-    // is the initial board solvable?
-    public boolean isSolvable() {
-        return solvable;
-    }
-
-    // min number of moves to solve initial board; -1 if no solution
-    public int moves() {
-        if (solvable) {
-            return createStackSolution().size() - 1;
-            // return searchNode.moves;
-        } else
-            return -1;
-    }
-
-    // sequence of boards in a shortest solution; null if no solution
-    public Iterable<Board> solution() {
-        if (isSolvable()) {
-            return createStackSolution();
-        }
-        return null;
-    }
-
-    private Stack<Board> createStackSolution() {
-        if (solution == null) {
-            solution = new Stack<>();
-
-            while (searchNode != null) {
-                solution.push(searchNode.board);
-                searchNode = searchNode.previous;
-            }
-        }
-        return solution;
-    }
-
-    // solve a slider puzzle (given below)
-    public static void main(String[] args) {
-        // create initial board from file
-        URL testFile;
-        if (args != null && args.length > 0) {
-            testFile = Solver.class.getResource(args[0]);
-        } else {
-            testFile = Solver.class.getResource("8puzzle/puzzle4x4-hard2.txt");
-        }
-        In in = new In(testFile);
-        int N = in.readInt();
-        int[][] blocks = new int[N][N];
-        for (int i = 0; i < N; i++)
-            for (int j = 0; j < N; j++)
-                blocks[i][j] = in.readInt();
-        Board initial = new Board(blocks);
-
-        // solve the puzzle
-        Solver solver = new Solver(initial);
-
-        // print solution to standard output
-        if (!solver.isSolvable())
+public class Solver2 {
+    private boolean isSolve = false;  
+    private int move = -1;  
+  
+    private class SearchNode implements Comparable<SearchNode>{  
+        private final Board2 board;
+        private final int move;  
+        private final int priority;  
+        private final SearchNode parent;  
+        private final boolean isTwin;  
+          
+        public SearchNode(Board2 board, int move, SearchNode parent, boolean isTwin){
+            this.board = board;  
+            this.move = move;  
+            this.priority = board.manhattan() + move;  
+            this.parent = parent;  
+            this.isTwin = isTwin;  
+        }  
+  
+        @Override  
+        public int compareTo(SearchNode that) {  
+            if (this.board.equals(that.board)) return 0;  
+            if (this.priority < that.priority) return -1;  
+            else return 1;  
+        }  
+    }  
+      
+    private MinPQ<SearchNode> minPQ = new MinPQ<SearchNode>(new Comparator<SearchNode>() {
+        public int compare(SearchNode o1, SearchNode o2) {  
+            if (o1.priority < o2.priority) return -1;  
+           else if (o1.priority == o2.priority) return 0;  
+           else return 1;  
+        }  
+    });  
+      
+    private Stack<Board2> solutionQueue = new Stack<Board2>();
+      
+    // find a solution to the initial board (using the A* algorithm)  
+    public Solver2(Board2 initial){
+        Board2 initialTwin = initial.twin();
+        SearchNode initSearchNode = new SearchNode(initial, 0, null, false);  
+        SearchNode initSearchNodeTwin = new SearchNode(initialTwin, 0, null, true);  
+        minPQ.insert(initSearchNode);  
+        minPQ.insert(initSearchNodeTwin);  
+        solve();  
+    }  
+      
+    private void solve(){  
+        while(true){  
+            //solve for original  
+            SearchNode searchNode = minPQ.delMin();  
+            if (searchNode.board.isGoal()){  
+                if (searchNode.isTwin){  
+                    this.isSolve = false;  
+                    this.move = -1;  
+                } else {  
+                    this.isSolve = true;  
+                    this.move = searchNode.move;  
+                    this.solutionQueue.push(searchNode.board);  
+                    while(searchNode.parent != null){  
+                        searchNode = searchNode.parent;  
+                        this.solutionQueue.push(searchNode.board);  
+                    }  
+                }  
+                break;  
+            }else{  
+                for (Board2 neiborBoard: searchNode.board.neighbors()){
+                    SearchNode neiborNode = new SearchNode(neiborBoard, searchNode.move+1, searchNode, searchNode.isTwin);  
+                    if (searchNode.parent == null){  
+                        minPQ.insert(neiborNode);  
+                    } else if (!searchNode.parent.board.equals(neiborNode.board)){  
+                        minPQ.insert(neiborNode);  
+                    }  
+                }  
+            }  
+        }  
+    }  
+      
+    // is the initial board solvable?  
+    public boolean isSolvable(){  
+        return this.isSolve;  
+    }  
+      
+    // min number of moves to solve initial board; -1 if no solution  
+    public int moves(){  
+        return this.move;  
+    }  
+      
+    // sequence of boards in a shortest solution; null if no solution  
+    public Iterable<Board2> solution(){
+        if (this.isSolve){  
+            return this.solutionQueue;  
+        }else{  
+            return null;  
+        }  
+          
+    }  
+      
+    public static void main(String[] args) {  
+        // create initial board from file  
+        In in = new In(args[0]);
+        int N = in.readInt();  
+        int[][] blocks = new int[N][N];  
+        for (int i = 0; i < N; i++)  
+            for (int j = 0; j < N; j++)  
+                blocks[i][j] = in.readInt();  
+        Board2 initial = new Board2(blocks);
+  
+        // solve the puzzle  
+        Solver2 solver = new Solver2(initial);
+  
+        // print solution to standard output  
+        if (!solver.isSolvable())  
             StdOut.println("No solution possible");
-        else {
-            StdOut.println("Minimum number of moves = " + solver.moves());
-            for (Board board : solver.solution())
-                StdOut.println(board);
-        }
-    }
-}
+        else {  
+            StdOut.println("Minimum number of moves = " + solver.moves());  
+            for (Board2 board : solver.solution())
+                StdOut.println(board);  
+        }  
+    }  
+}  
