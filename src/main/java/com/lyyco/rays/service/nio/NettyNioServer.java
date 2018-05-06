@@ -28,6 +28,7 @@ public class NettyNioServer {
             ServerBootstrap b = new ServerBootstrap();
             b.group(group)
                     //use NioEventLoopGroup to allow non-blocking mode
+                    //若想使用Epoll，则为 EpollEventLoopGroup
                     .channel(NioServerSocketChannel.class)
                     .localAddress(new InetSocketAddress(port))
                     /*
