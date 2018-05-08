@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.Reflect;
+package com.lyyco.rays.service.reflect;
 
 /**
  * com.lyyco.rays.service.Reflect
@@ -13,11 +13,11 @@ public class Hello {
         Class<?> demo1 = null;
         Class<?> demo2 = null;
         Class<?> demo3 = null;
-        demo1 = Class.forName("com.lyyco.rays.service.Reflect.Demo");
+        demo1 = Class.forName("com.lyyco.rays.service.reflect.Demo");
         demo2 = new Demo().getClass();
         demo3 = Demo.class;
         Class<?> demo4 = null;
-        demo4 = Class.forName("com.lyyco.rays.service.Reflect.Person");
+        demo4 = Class.forName("com.lyyco.rays.service.reflect.Person");
         Person per = (Person) demo4.newInstance();
         per.setAge(1);
         per.setName("lyy");

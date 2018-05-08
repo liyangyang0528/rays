@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.Reflect;
+package com.lyyco.rays.service.reflect;
 
 import java.util.HashMap;
 

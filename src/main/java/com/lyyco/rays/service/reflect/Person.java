@@ -1,6 +1,4 @@
-package com.lyyco.rays.service.Reflect;
-
-import java.lang.reflect.InvocationTargetException;
+package com.lyyco.rays.service.reflect;
 
 /**
  * com.lyyco.rays.service.Reflect

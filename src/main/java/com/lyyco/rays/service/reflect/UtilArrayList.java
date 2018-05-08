@@ -1,7 +1,6 @@
-package com.lyyco.rays.service.Reflect;
+package com.lyyco.rays.service.reflect;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * com.lyyco.rays.service.Reflect
