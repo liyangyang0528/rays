@@ -21,6 +21,11 @@ public class Shop {
         return name;
     }
 
+    /**
+     * 根据指定产品名称返回价格的方法
+     * @param product
+     * @return
+     */
     public String getPrice(String product) {
         return String.valueOf(calculatePrice(product));
     }
@@ -65,7 +70,7 @@ public class Shop {
 
     public static void delay() {
         try {
-            Thread.sleep(10000L);
+            Thread.sleep(1000L);
         } catch (InterruptedException e) {
             throw new RuntimeException();
         }
@@ -115,10 +120,10 @@ public class Shop {
         long start = System.nanoTime();
         Future<Double> futurePrice = shop.getPriceAsync("my favorite");
         long invocationTime = (System.nanoTime() - start);
-        System.out.println(invocationTime);
+        System.out.println("Invocation returned after"+invocationTime+"msecs");
         try {
             double pricee = futurePrice.get();
-            System.out.println(System.nanoTime() - start);
+            System.out.println(System.nanoTime() - start + "price is " + pricee);
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
