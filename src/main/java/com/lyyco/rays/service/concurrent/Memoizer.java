@@ -39,7 +39,7 @@ public class Memoizer<A, V> implements Computable<A, V> {
             } catch (CancellationException e) {
                 cache.remove(arg,f);
             }catch (ExecutionException e){
-                
+
             }
 
         }
