@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.pattern;
+package com.lyyco.rays.service.effective;
 
 import java.util.EnumSet;
 import java.util.Objects;
