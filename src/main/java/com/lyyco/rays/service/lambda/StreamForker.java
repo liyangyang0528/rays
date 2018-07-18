@@ -97,26 +97,26 @@ public class StreamForker<T> {
 
     //TODO
     public static void main(String... args) {
-        Dish dish1 = new Dish("bread", false, 10, Type.OTHER);
-        Dish dish2 = new Dish("fish", false, 10, Type.MEAT);
-
-        List<Dish> menu = Lists.newArrayList(dish1, dish2);
-        Stream<Dish> menuStream = menu.stream();
-        Results results = new StreamForker<>(menuStream)
-                .fork("shortMenu", s -> s.map(Dish::getName)
-                        .collect(joining(", ")))
-                .fork("totalCalories", s -> s.mapToInt(Dish::getCalories).sum())
-                .fork("mostCaloricDish", s -> s.collect(reducing(
-                        (d1, d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2))
-                        .get())
-                .fork("dishesByType", s -> s.collect(groupingBy(Dish::getType)))
-                .getResults();
-        String shortMenu = results.get("shortMenu");
-        int totalCalories = results.get("totalCalories");
-        Dish mostCaloricDish = results.get("mostCaloricDish");
-        System.out.println(shortMenu);
-        System.out.println(totalCalories);
-        System.out.println(mostCaloricDish);
+//        Dish dish1 = new Dish("bread", false, 10, Type.OTHER);
+//        Dish dish2 = new Dish("fish", false, 10, Type.MEAT);
+//
+//        List<Dish> menu = Lists.newArrayList(dish1, dish2);
+//        Stream<Dish> menuStream = menu.stream();
+//        Results results = new StreamForker<>(menuStream)
+//                .fork("shortMenu", s -> s.map(Dish::getName)
+//                        .collect(joining(", ")))
+//                .fork("totalCalories", s -> s.mapToInt(Dish::getCalories).sum())
+//                .fork("mostCaloricDish", s -> s.collect(reducing(
+//                        (d1, d2) -> d1.getCalories() > d2.getCalories() ? d1 : d2))
+//                        .get())
+//                .fork("dishesByType", s -> s.collect(groupingBy(Dish::getType)))
+//                .getResults();
+//        String shortMenu = results.get("shortMenu");
+//        int totalCalories = results.get("totalCalories");
+//        Dish mostCaloricDish = results.get("mostCaloricDish");
+//        System.out.println(shortMenu);
+//        System.out.println(totalCalories);
+//        System.out.println(mostCaloricDish);
     }
 
     /**
