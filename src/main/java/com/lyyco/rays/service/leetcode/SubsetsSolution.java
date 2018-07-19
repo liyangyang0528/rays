@@ -118,7 +118,7 @@ public class SubsetsSolution {
             if (nums[left] == 0 && nums[right] == 0){
                 right++;
             } else if (nums[left] == 0 && nums[right] != 0){
-                swap(nums, left, right);
+                swap1(nums, left, right);
             } else {
                 left ++;
                 right++;
@@ -126,7 +126,7 @@ public class SubsetsSolution {
         }
     }
 
-    private void swap (int[]nums, int left, int right){
+    private void swap1 (int[]nums, int left, int right){
         int temp = nums[left];
         nums[left] = nums[right];
         nums[right] = temp;
@@ -155,15 +155,31 @@ public class SubsetsSolution {
      * Output:
      * [5,6]
      */
-
     public List<Integer> findDisappearedNumbers(int[] nums) {
-        return null;
+        List<Integer> res = new LinkedList<>();
+        if(null == nums || nums.length == 0) return res;
+        for(int i = 0;i<nums.length;i++){
+            while (nums[i] != i+1 && nums[i] != nums[nums[i]-1])
+                swap2(nums,i,nums[i]-1);
+        }
+        for(int i=0;i<nums.length;i++)
+            if(nums[i]!=i+1) res.add(i+1);
+
+        return res;
     }
+
+    private void swap2(int[] nums, int i, int j) {
+        int temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
     public static void main(String... args) {
         SubsetsSolution subsetsSolution = new SubsetsSolution();
-        int[] nums = {0,1,0,3,12};
+        int[] nums = {4,3,2,7,8,2,3,1};
 //        subsetsSolution.findDuplicates(nums);
 //        subsetsSolution.findMaxConsecutiveOnes(nums);
-        subsetsSolution.moveZeroes1(nums);
+//        subsetsSolution.moveZeroes1(nums);
+        subsetsSolution.findDisappearedNumbers(nums);
     }
 }
