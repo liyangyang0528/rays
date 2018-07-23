@@ -1,5 +1,8 @@
 package com.lyyco.rays.service.algorithm.search;
 
+
+import edu.princeton.cs.algs4.Queue;
+
 /**
  * Author liyangyang
  * 2018/6/4
@@ -43,7 +46,7 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
     }
 
     /**
-     *
+     * 基于有序数组的二分查找
      The reason that we keep keys in an ordered array is so that we can
      use array indexing to dramatically reduce the number of compares required for each
      search, using the classic and venerable binary search algorithm
@@ -61,8 +64,52 @@ public class BinarySearchST<Key extends Comparable<Key>, Value> {
         }
         return lo;
     }
+    //递归的二分查找
+    public int rank(Key key,int lo,int hi){
+        if(hi < lo) return lo;
+        int mid = lo + (hi - lo)/2;
+        int cmp = key.compareTo(keys[mid]);
+        if(cmp < 0) return rank(key,lo,mid-1);
+        else if(cmp > 0) return rank(key,mid+1,hi);
+        else return mid;
+
+    }
 
     public boolean isEmpty() {
         return N == 0;
+    }
+
+    public Key min(){
+        return keys[0];
+    }
+    public Key max(){
+        return keys[N-1];
+    }
+    public Key select(int k){
+        return keys[k];
+    }
+    public Key ceiling(Key key){
+        int i = rank(key);
+        return keys[i];
+    }
+    public Key delete(Key key){
+        //TODO
+        return null;
+    }
+    public Key floor(Key key){
+        //TODO
+        return null;
+    }
+//    public Iterable<Key> keys(Key lo,Key hi){
+//        Queue<Key> q = new Queue<Key>();
+//        for(int i = rank(lo);i<rank(hi);i++){
+//            q.enqueue(keys[i]);
+//            if(contains(hi))
+//                q.enqueue(keys[rank(hi)]);
+//            return q;
+//        }
+//    }
+    public static void main(String...args){
+
     }
 }
