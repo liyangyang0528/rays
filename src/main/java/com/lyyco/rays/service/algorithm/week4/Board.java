@@ -2,8 +2,8 @@ package com.lyyco.rays.service.algorithm.week4;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 
 public class Board {
@@ -174,7 +174,6 @@ public class Board {
         }
         return s.toString();
     }
-
     private int calHamming(char[] chars) {
         int count = 0;
         for (int i = 0; i < chars.length; i++) {

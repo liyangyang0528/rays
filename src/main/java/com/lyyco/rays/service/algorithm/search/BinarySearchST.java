@@ -1,7 +1,6 @@
 package com.lyyco.rays.service.algorithm.search;
 
 
-import edu.princeton.cs.algs4.Queue;
 
 /**
  * Author liyangyang
