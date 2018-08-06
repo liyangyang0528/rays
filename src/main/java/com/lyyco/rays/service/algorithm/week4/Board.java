@@ -1,219 +1,138 @@
 package com.lyyco.rays.service.algorithm.week4;
-import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-
+import edu.princeton.cs.algs4.Queue;
 
 public class Board {
-
-    private char[] cells;
-    private int dimension;
-    private int zero;
-    private int hamming;
-    private int manhattan;
-
-    /**
-     * construct a board from an n-by-n array of blocks (where blocks[i][j] = block in row i, column j)
-     *
-     * @param blocks
-     */
-    public Board(int[][] blocks) {
-        dimension = blocks.length;
-        cells = new char[dimension * dimension];
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                cells[i * dimension + j] = (char) blocks[i][j];
-                if (cells[i * dimension + j] == 0) {
-                    zero = i * dimension + j;
+    private int N;
+    private int[][] blocks;
+    private int row0, column0;
+    public Board(int[][] blocks) { //construct a board from an N-by-N array of blocks.
+        N = blocks.length;
+        this.blocks = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                this.blocks[i][j] = blocks[i][j];
+                if (blocks[i][j] == 0) {
+                    row0 = i;
+                    column0 = j;
+                    
                 }
             }
         }
-        hamming = calHamming(cells);
-        manhattan = calManhattan(cells);
     }
-
-    private Board(char[] cells, int dimension, int zero, int hamming, int manhattan) {
-        this.dimension = dimension;
-        this.cells = cells;
-        this.zero = zero;
-        this.hamming = hamming;
-        this.manhattan = manhattan;
-    }
-
-    // unit tests
-    public static void main(String[] args) {
-        In in = new In(args[0]);
-        int size = in.readInt();
-        int[][] blocks = new int[size][size];
-        for (int i = 0; i < size; i++)
-            for (int j = 0; j < size; j++)
-                blocks[i][j] = in.readInt();
-        Board b = new Board(blocks);
-        StdOut.println(b);
-        System.out.println(b.hamming);
-        for (Board board : b.neighbors()) {
-            System.out.println(board);
-            System.out.println(b.hamming);
-        }
-    }
-
-    /**
-     * board dimension n
-     *
-     * @return
-     */
     public int dimension() {
-        return dimension;
+        return N;
     }
-
-    /**
-     * number of blocks out of place
-     *
-     * @return
-     */
     public int hamming() {
+        int hamming = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                /*if ((i == N - 1) && (j == N - 1)) {
+                    if (blocks[i][j] != 0) {
+                        hamming++;
+                    }*/
+                
+                if ((blocks[i][j] != 0) && (blocks[i][j]) != (i * N + j + 1)) {
+                    hamming++;
+                }
+                
+            }
+        }
         return hamming;
     }
-
-    /**
-     * sum of Manhattan distances between blocks and goal
-     *
-     * @return
-     */
     public int manhattan() {
+        int manhattan = 0;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if ((blocks[i][j] != 0) && (blocks[i][j]) != (i * N + j + 1)) {
+                    int temp = blocks[i][j] - 1;
+                    int row = temp / N;
+                    int column = temp % N;
+                    int diff1 = i - row;
+                    if (diff1 < 0) diff1 = -diff1;
+                    int diff2 = j - column;
+                    if (diff2 < 0) diff2 = -diff2;
+                    manhattan = manhattan + diff1 + diff2;
+                }
+            }
+        }
         return manhattan;
     }
-
-    /**
-     * is this board the goal board?
-     *
-     * @return
-     */
     public boolean isGoal() {
-        return hamming == 0;
-    }
-
-    /**
-     * a board that is obtained by exchanging any pair of blocks
-     *
-     * @return
-     */
-    public Board twin() {
-        char[] copy = cells.clone();
-        for (int i = 0; i < cells.length; i++) {
-            // 第一列 或者 相邻元素有0 除外
-            if (i % dimension == 0 || cells[i] * cells[i - 1] == 0) continue;
-            exch(copy, i, i - 1);
-            int h = hamming;
-            int m = manhattan;
-            for (int j = i; j > i - 2; j--) {
-                h += calHamming(copy[j], j) - calHamming(cells[j], j);
-                m += calManhattan(copy[j], j) - calManhattan(cells[j], j);
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if ((i == N - 1) && (j == N - 1)) {
+                    if (blocks[i][j] != 0) {
+                        return false;
+                    }
+                } else {
+                    if ((blocks[i][j]) != (i * N + j + 1)) {
+                        return false;
+                    }
+                }
             }
-            return new Board(copy, dimension, zero, h, m);
         }
-        return null;
+        return true;
     }
-
-    /**
-     * does this board equal y?
-     *
-     * @param y
-     * @return
-     */
-    @Override
+    public Board twin() {
+        int rowNum = (row0 +  1) % N;
+        return exchangeTile(rowNum, 0, rowNum, 1);
+        
+    }
+    private Board exchangeTile(int r1, int c1, int r2, int c2) {
+        int[][] neighbor =  new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                neighbor[i][j] = blocks[i][j];
+            }
+        }
+        int temp = neighbor[r1][c1];
+        neighbor[r1][c1] = neighbor[r2][c2];
+        neighbor[r2][c2] = temp;
+        return new Board(neighbor);
+    }
     public boolean equals(Object y) {
-        if (null == y || this.getClass() != y.getClass()) {
-            return false;
+        if (this == y) return true;
+        if (y == null) return false;
+        if (this.getClass() != y.getClass()) return false;
+        Board that = (Board) y;
+        if (N != that.dimension()) return false;
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                if (blocks[i][j] != that.blocks[i][j]) return false;
+            }
         }
-        return new String(cells).equals(new String(((Board) y).cells));
+        return true;
     }
-
-    /**
-     * all neighboring boards
-     *
-     * @return
-     */
     public Iterable<Board> neighbors() {
-        List<Board> neighbours = new ArrayList<>();
-        // 空格向上
-        if (zero / dimension != 0) {
-            neighbours.add(neighbour(zero - dimension));
+        Queue<Board> neighbors = new Queue<Board>();
+        if (row0 >= 1) {
+            neighbors.enqueue(exchangeTile(row0 - 1, column0, row0, column0));
         }
-        // 空格向下
-        if (zero / dimension != (dimension - 1)) {
-            neighbours.add(neighbour(zero + dimension));
+        if (row0 <= N - 2) {
+            neighbors.enqueue(exchangeTile(row0 + 1, column0, row0, column0));
         }
-        // 空格向左
-        if (zero % dimension != 0) {
-            neighbours.add(neighbour(zero - 1));
-        }
-        // 空格向右
-        if (zero % dimension != (dimension - 1)) {
-            neighbours.add(neighbour(zero + 1));
-        }
-        return neighbours;
+        if (column0 >= 1)
+           {
+              neighbors.enqueue(exchangeTile(row0, column0 - 1, row0, column0));
+           }
+        if (column0 <= N - 2)
+           {
+              neighbors.enqueue(exchangeTile(row0, column0 + 1, row0, column0));
+           }
+            
+        return neighbors;
+        
     }
-
-    /**
-     * string representation of this board (in the output format specified below)
-     *
-     * @return
-     */
-    @Override
     public String toString() {
         StringBuilder s = new StringBuilder();
-        s.append(dimension + " \n ");
-        for (int i = 0; i < dimension; i++) {
-            for (int j = 0; j < dimension; j++) {
-                s.append(String.format("%d ", (int) cells[i * dimension + j]));
+        s.append(N + "\n");
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
+                s.append(String.format("%2d ", blocks[i][j]));
             }
-            s.append("\n ");
+              s.append("\n");
         }
-        return s.toString();
-    }
-    private int calHamming(char[] chars) {
-        int count = 0;
-        for (int i = 0; i < chars.length; i++) {
-            count += calHamming(chars[i], i);
-        }
-        return count;
-    }
-
-    private int calHamming(char c, int i) {
-        if (c == 0) return 0;
-        if (c != (i + 1)) return 1;
-        return 0;
-    }
-
-    private int calManhattan(char[] chars) {
-        int count = 0;
-        for (int i = 0; i < chars.length; i++) {
-            count += calManhattan(chars[i], i);
-        }
-        return count;
-    }
-
-    private int calManhattan(char c, int i) {
-        if (c == 0) return 0;
-        return Math.abs(i / dimension - (c - 1) / dimension) + Math.abs(i % dimension - (c - 1) % dimension);
-    }
-
-    private void exch(char[] chars, int i, int j) {
-        char temp = chars[i];
-        chars[i] = chars[j];
-        chars[j] = temp;
-    }
-
-    private Board neighbour(int i) {
-        char[] copy = cells.clone();
-        exch(copy, zero, i);
-        int h = hamming;
-        int m = manhattan;
-        h += calHamming(copy[zero], zero) - calHamming(copy[i], i);
-        m += calManhattan(copy[zero], zero) - calManhattan(copy[i], i);
-        return new Board(copy, dimension, i, h, m);
+        return s.toString();        
     }
 }

@@ -1,199 +1,206 @@
 package com.lyyco.rays.service.algorithm.week5;
 
-import edu.princeton.cs.algs4.*;
+import edu.princeton.cs.algs4.SET;
+import edu.princeton.cs.algs4.Point2D;
+import edu.princeton.cs.algs4.RectHV;
 
-/**
- * Author liyangyang
- * 2018/4/28
- */
 public class KdTree {
-    private static final RectHV CANVAS = new RectHV(0, 0, 1, 1);
-    private Node root;
-    private int count;
+    private int size = 0;
+    private Node root = null;
 
-    public KdTree() {
-        this.root = null;
-        this.count = 0;
-    }
-
-    public boolean isEmpty() {
-        return count == 0;
-    }
-
-    public int size() {
-        return count;
-
-    }
-
-    public void insert(Point2D p) {
-        if (null == p) throw new NullPointerException("Point is null");
-        root = insert(p, root, true, CANVAS);
-
-    }
-
-    public boolean contains(Point2D p) {
-        if (null == p) throw new NullPointerException("Point is null");
-        return get(p, root) != null;
-    }
-
-    public void draw() {
-        draw(root);
-    }
-
-    public Iterable<Point2D> range(RectHV rect) {
-        if (null == rect) throw new NullPointerException("rect is null");
-        SET<Point2D> set = new SET<>();
-        range(set, rect, root);
-        return set;
-    }
-
-    public Point2D nearest(Point2D p) {
-        if (null == p) throw new NullPointerException("Point is null");
-        if (null == root) return null;
-        Point2D retP = null;
-        double min = Double.MAX_VALUE;
-        Queue<Node> queue = new Queue<>();
-        queue.enqueue(root);
-
-        while (!queue.isEmpty()) {
-            Node x = queue.dequeue();
-            double dis = p.distanceSquaredTo(x.p);
-
-            if (dis < min) {
-                retP = x.p;
-                min = dis;
-            }
-            if (null != x.left && x.left.rect.distanceSquaredTo(p) < min) {
-                queue.enqueue(x.left);
-            }
-            if (null != x.left && x.right.rect.distanceSquaredTo(p) < min) {
-                queue.enqueue(x.right);
-            }
-        }
-        return retP;
-    }
-
-
-    private Object get(Point2D p, Node n) {
-        if (null == n) {
-            return null;
-        }
-        // p和n节点中点相同
-        if (n.p.equals(p)) {
-            return n;
-        }
-        // p在n节点的左边或下边
-        if (n.compareTo(p) > 0) {
-            return get(p, n.left);
-        } else {
-            return get(p, n.right);
-        }
-    }
-
-    private void draw(Node n) {
-        if (null == n) return;
-        draw(n.left);
-        StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.01);
-        n.p.draw();
-        StdDraw.setPenRadius();
-        if (n.coordinate) {
-            StdDraw.setPenColor(StdDraw.RED);
-            StdDraw.line(n.p.x(), n.rect.ymin(), n.p.x(), n.rect.ymax());
-        } else {
-            StdDraw.setPenColor(StdDraw.BLUE);
-            StdDraw.line(n.rect.xmin(), n.p.y(), n.rect.xmax(), n.p.y());
-        }
-        draw(n.right);
-    }
-
-    private Node insert(Point2D p, Node n, boolean coordinate, RectHV rect) {
-        if (null == n) {
-            count++;
-            return new Node(p, coordinate, rect);
-        }
-        if (p.equals(n.p)) return n;
-        if (n.compareTo(p) > 0) {
-            n.left = insert(p, n.left, !coordinate, childRect(n, true));
-        } else {
-            n.right = insert(p, n.right, !coordinate, childRect(n, false));
-        }
-
-        return n;
-    }
-
-    private RectHV childRect(Node n, boolean left) {
-        RectHV rect;
-        RectHV temp = n.rect;
-        // 左子树
-        if (left) {
-            if (null != n.left) {
-                return n.left.rect;
-            }
-            // x-coordinate 划分，生成左半边矩阵
-            // y-coordinate 划分，生成下半边矩阵
-            if (n.coordinate) {
-                rect = new RectHV(temp.xmin(), temp.ymin(), n.p.x(), temp.ymax());
-            } else {
-                rect = new RectHV(temp.xmin(), temp.ymin(), temp.xmax(), n.p.y());
-            }
-        } else {
-            if (null != n.right) {
-                return n.right.rect;
-            }
-            if (n.coordinate) {
-                rect = new RectHV(n.p.x(), temp.ymin(), temp.xmax(), temp.ymax());
-            } else {
-                rect = new RectHV(temp.xmin(), n.p.y(), temp.xmax(), temp.ymax());
-            }
-        }
-        return rect;
-    }
-
-    private void range(SET<Point2D> set, RectHV rect, Node n) {
-        if (null == n || !n.rect.intersects(rect)) return;
-        // 矩形块 在节点n左边或下边 有一部分
-        boolean left = (n.coordinate && rect.xmin() < n.p.x()) || (!n.coordinate && rect.ymin() < n.p.y());
-        // 矩形块 在节点n右边或上边 有一部分
-        boolean right = (n.coordinate && rect.xmax() >= n.p.x() || (!n.coordinate && rect.ymax() >= n.p.y()));
-        if (left) {
-            range(set, rect, n.left);
-        }
-        if (rect.contains(n.p)) {
-            set.add(n.p);
-        }
-        if (right) {
-            range(set, rect, n.right);
-        }
-    }
-
-    private static class Node {
+    private class Node {
         private Point2D p;
-        private RectHV rect;
-        private Node left;
-        private Node right;
-        private boolean coordinate;
-
-        public Node(Point2D p, boolean coordinate, RectHV rect) {
+        private Node left; //left child
+        private Node right; //right child
+        public Node(Point2D p) {
             this.p = p;
-            this.coordinate = coordinate;
-            this.rect = rect;
-        }
-
-        public int compareTo(Point2D that) {
-            if (coordinate) {
-                if (this.p.x() < that.x()) return -1;
-                if (this.p.x() > that.x()) return -1;
-
-            } else {
-                if (this.p.y() < that.y()) return -1;
-                if (this.p.y() > that.y()) return 1;
-            }
-            return 0;
-        }
+            this.left = null;
+            this.right = null;
+        }        
+    }    
+    public KdTree() {
+        size = 0;
+        root = null;        
+    }    
+    public int size() {
+        return size;
+    }    
+    public boolean isEmpty()                        // is the set empty?
+    {
+       return size == 0;
     }
-
-    public static void main(String... args) {
-
+    private boolean isGoLeft(Point2D pointNode, Point2D p, int depth) 
+    {
+        return (depth % 2 == 0) ? (p.x() < pointNode.x()) : (p.y() < pointNode.y());
+    }
+    public void insert(Point2D p) {
+        if (isEmpty()) {
+            root = new Node(p);
+            size++;
+            return;
+        }
+        insert(root, p, 0);
+    }
+    private void insert(Node current, Point2D point, int depth) {
+        if (current.p.equals(point)) return;
+        boolean goLeft = isGoLeft(current.p, point, depth);
+        if (goLeft) {
+            if (current.left == null) {
+                current.left = new Node(point);
+                size++;
+                return;
+            } else {
+                insert(current.left, point, depth + 1);                
+            }            
+        } else {
+            if (current.right == null) {
+                current.right = new Node(point);
+                size++;
+             } else {
+                insert(current.right, point, depth + 1);
+            }
+        }
+        
+    }
+    private boolean contains(Node current, Point2D p, int depth)              // does the set contain the point p?
+    {
+       if (current.p.equals(p))  return true;
+       boolean goLeft = isGoLeft(current.p, p, depth);
+       if (goLeft)
+       {
+          if (current.left == null)
+          {
+               return false;
+          } else {
+             return contains(current.left, p, depth + 1);
+          }
+       } else {
+          if (current.right == null)
+          {            
+             return false;
+          } else {
+             return contains(current.right, p, depth + 1);
+          }
+       }
+    }
+     
+    public boolean contains(Point2D p)              // does the set contain the point p?
+    {
+       if (root == null) 
+       {
+          return false;
+       }         
+       return contains(root, p, 0);
+    }
+    private void draw(Node current)
+    {
+       if (current == null) return;
+       current.p.draw();       
+       draw(current.left);
+       draw(current.right);
+       
+    }
+    public void draw()                              // draw all of the points to standard draw
+    {
+       draw(root);
+    }
+    private void range(Node current, RectHV rect, SET<Point2D> result, int depth)
+    {
+       if (current == null) return;
+       if (rect.contains(current.p)) result.add(current.p);
+       if (depth % 2 == 0)
+       {
+          if (current.p.x() < rect.xmin()) 
+          {
+             range(current.right, rect, result, depth + 1);
+          } else if (current.p.x() > rect.xmax()) 
+          {
+             range(current.left, rect, result, depth + 1);
+          } else
+          {
+             range(current.right, rect, result, depth + 1);
+             range(current.left, rect, result, depth + 1);               
+          }            
+       } else {
+          if (current.p.y() < rect.ymin()) 
+          {
+             range(current.right, rect, result, depth + 1);
+          } else if (current.p.y() > rect.ymax()) 
+          {
+             range(current.left, rect, result, depth + 1);
+          } else
+          {
+             range(current.right, rect, result, depth + 1);
+             range(current.left, rect, result, depth + 1);               
+          }            
+       }         
+    }
+    public Iterable<Point2D> range(RectHV rect)     // all points in the set that are inside the rectangle
+    {
+       SET<Point2D> result = new SET<Point2D>();
+       range(root, rect, result, 0);
+       return result;
+    }
+    private class PointDist
+    {
+       private Point2D point;
+       private double distSq;
+       public PointDist(Point2D p, double distSq)
+       {
+          this.point = p;
+          this.distSq = distSq;
+       }
+    }
+    private PointDist nearest(Node current, Point2D p, int depth, PointDist previous, RectHV rect) 
+    {
+       PointDist result = previous;
+       double distSq = current.p.distanceSquaredTo(p);
+       if (distSq < previous.distSq) {
+          result = new PointDist(current.p, distSq);
+       }         
+       double xmin = rect.xmin();
+       double ymin = rect.ymin();
+       double xmax = rect.xmax();
+       double ymax = rect.ymax();
+       RectHV leftRect, rightRect;
+       if (depth % 2 == 0) {
+           leftRect = new RectHV(xmin, ymin, current.p.x(), ymax);
+           rightRect = new RectHV(current.p.x(), ymin, xmax, ymax);              
+       } else {
+           leftRect = new RectHV(xmin, ymin, xmax, current.p.y());
+           rightRect = new RectHV(xmin, current.p.y(), xmax, ymax);              
+       }
+       
+       boolean goLeft = isGoLeft(current.p, p, depth); //p in the left of current.p
+       if (goLeft)
+       {
+          if (current.left != null) {
+             result = nearest(current.left, p, depth + 1, result, leftRect);
+          }
+          double distanceSquaredToRect = rightRect.distanceSquaredTo(p);
+          if ((current.right != null) && (distanceSquaredToRect < result.distSq)) {
+              result = nearest(current.right, p, depth + 1, result, rightRect);
+          }          
+       } else {
+          if (current.right != null) {
+             result = nearest(current.right, p, depth + 1, result, rightRect);
+          }
+          double distanceSquaredToRect = leftRect.distanceSquaredTo(p);
+          if ((current.left != null) && (distanceSquaredToRect < result.distSq)) {
+              result = nearest(current.left, p, depth + 1, result, leftRect);
+          }
+       }       
+       return result;
+    }
+    public Point2D nearest(Point2D p)               // a nearest neighbor in the set to p; null if set is empty
+    {
+       if (root == null) 
+       {
+          return null;
+       }
+       PointDist result = new PointDist(new Point2D(0, 0), Double.MAX_VALUE);
+       RectHV rect = new RectHV(-Double.MAX_VALUE, -Double.MAX_VALUE, Double.MAX_VALUE, Double.MAX_VALUE);
+       result = nearest(root, p, 0, result, rect);
+       return result.point;
     }
 }
