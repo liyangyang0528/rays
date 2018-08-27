@@ -1,5 +1,7 @@
 package com.lyyco.rays.service.leetcode;
 
+import com.google.common.collect.Lists;
+
 import java.util.*;
 
 /**
@@ -286,7 +288,7 @@ public class TreeSolution {
         return 1;
     }
 
-    /*相同的想法
+    /*
     试一下广度优先
     依旧是卡在层级如何表示上
     看了discuss知道了一种方法标识层级：广度优先展开root的children加入到队列
@@ -311,8 +313,11 @@ public class TreeSolution {
     public int maxDepthDiscuss1(Node root) {
         if (root == null) return 0;
         int max = 0;
-        for (Node child : root.children) {
-            max = Math.max(max, maxDepthDiscuss1(child));
+        if (null != root.children) {
+            for (Node child : root.children) {
+                int current = maxDepthDiscuss1(child);
+                max = Math.max(max, current);
+            }
         }
         return max + 1;
     }
@@ -355,12 +360,11 @@ Use a FIFO queue to traverse tree at level-order and increment depth when starti
         while (!queue.isEmpty()) {
             Node n = queue.pollFirst();
             List<Node> children = n.children;
-            Node newLast =null;
+            Node newLast = null;
             if (null != children && children.size() > 0) {
                 for (int i = 0; i < children.size() - 1; i++) {
                     queue.offer(children.get(i));
                 }
-
                 newLast = children.get(children.size() - 1);
                 queue.offer(newLast);
             }
@@ -380,25 +384,71 @@ Use a FIFO queue to traverse tree at level-order and increment depth when starti
         }
         return depth;
     }
+
     public int maxDepthDiscuss3(Node root) {
         int d = 0, cnt = 0;
         Queue<Node> q = new LinkedList<>();
 
-        if(root == null) return d;
+        if (root == null) return d;
 
         q.add(root);
 
-        while(!q.isEmpty()){
+        while (!q.isEmpty()) {
             d++;
             cnt = q.size();
-            for(int i = 0; i < cnt; i++){
+            for (int i = 0; i < cnt; i++) {
                 Node n = q.poll();
-                for(Node nn : n.children){
+                for (Node nn : n.children) {
                     q.add(nn);
                 }
             }
         }
 
         return d;
+    }
+    //Basic Recursive Java solution w/o helper methods
+    public int maxDepthDiscuss4(Node root) {
+        if(root == null) return 0;
+        if(null == root.children || root.children.size() == 0) return 1;
+        int max = -1;
+        int temp;
+        for(int i = 0 ; i < root.children.size() ; i++){
+            temp = 1 + maxDepthDiscuss4(root.children.get(i));
+            if(temp> max) max = temp;
+        }
+        return max;
+    }
+    //894. All Possible Full Binary Trees
+    /*
+A full binary tree is a binary tree where each node has exactly 0 or 2 children.
+
+Return a list of all possible full binary trees with N nodes.  Each element of the answer is the root node of one possible tree.
+
+Each node of each tree in the answer must have node.val = 0.
+
+You may return the final list of trees in any order.
+     */
+    public List<TreeNode> allPossibleFBT(int N) {
+        return null;
+    }
+    public static void main(String... args) {
+        TreeSolution treeSolution = new TreeSolution();
+        Node root = new Node();
+        root.val = 1;
+        Node three = new Node();
+        three.val = 3;
+        Node five = new Node();
+        five.val = 5;
+        Node six = new Node();
+        six.val = 6;
+        List<Node> threesChildren = Lists.newArrayList(five, six);
+        three.children = threesChildren;
+        Node two = new Node();
+        two.val = 2;
+        Node four = new Node();
+        four.val = 4;
+        List<Node> children = Lists.newArrayList(three, two, four);
+        root.children = children;
+        treeSolution.maxDepthDiscuss4(root);
     }
 }
