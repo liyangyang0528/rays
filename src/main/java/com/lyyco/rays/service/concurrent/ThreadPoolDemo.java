@@ -62,7 +62,7 @@ public class ThreadPoolDemo {
         /*
         创建线程池
          */
-        LinkedBlockingDeque blockingDeque = new LinkedBlockingDeque();
+        LinkedBlockingDeque blockingDeque = new LinkedBlockingDeque(100);
         ThreadPoolExecutor threadPoolExecutors = new ThreadPoolExecutor(5,10,
                 1000L,TimeUnit.MINUTES,
                 new LinkedBlockingDeque<Runnable>(),

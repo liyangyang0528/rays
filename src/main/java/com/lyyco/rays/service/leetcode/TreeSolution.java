@@ -406,29 +406,90 @@ Use a FIFO queue to traverse tree at level-order and increment depth when starti
 
         return d;
     }
+
     //Basic Recursive Java solution w/o helper methods
     public int maxDepthDiscuss4(Node root) {
-        if(root == null) return 0;
-        if(null == root.children || root.children.size() == 0) return 1;
+        if (root == null) return 0;
+        if (null == root.children || root.children.size() == 0) return 1;
         int max = -1;
         int temp;
-        for(int i = 0 ; i < root.children.size() ; i++){
+        for (int i = 0; i < root.children.size(); i++) {
             temp = 1 + maxDepthDiscuss4(root.children.get(i));
-            if(temp> max) max = temp;
+            if (temp > max) max = temp;
         }
         return max;
     }
+
     //894. All Possible Full Binary Trees
     /*
-A full binary tree is a binary tree where each node has exactly 0 or 2 children.
-
-Return a list of all possible full binary trees with N nodes.  Each element of the answer is the root node of one possible tree.
-
+A full binary tree is a binary tree where
+each node has exactly 0 or 2 children.
+Return a list of all possible full binary trees with N nodes.
+Each element of the answer is the root node of one possible tree.
 Each node of each tree in the answer must have node.val = 0.
-
 You may return the final list of trees in any order.
      */
-    public List<TreeNode> allPossibleFBT(int N) {
+    public List<TreeNode> allPossibleFBT(int n) {
+        List<TreeNode> ret = new ArrayList<>();
+        if (n == 1) {
+            // Exactly.
+            ret.add(new TreeNode(0));
+            return ret;
+        } else {
+                /*
+                 * For a given number n, exclude the root node, there's n-1 nodes left.
+                 *
+                 * Because it's a FBT, so the son nodes is FBT too, and it must contains
+                 * odd number of nodes.
+                 *
+                 * That is, root.left = allPossibleFBT(1) and root.right = allPossibleFBT(n - 2),
+                 * or root.left = allPossibleFBT(3) and root.right = allPossibleFBT(n - 4),
+                 * ...
+                 * or root.left = allPossibleFBT(n - 2) and root.right = allPossibleFBT(1).
+                 *
+                 * Combining all the possible situation, there's the final result.
+                 */
+            for (int i = 1; i <= (n - 1) / 2; i += 2) {
+                List<TreeNode> left = allPossibleFBT(i);
+                List<TreeNode> right = allPossibleFBT(n - 1 - i);
+                for (TreeNode leftNode : left) {
+                    for (TreeNode rightNode : right) {
+                        TreeNode node = new TreeNode(0);
+                        node.left = leftNode;
+                        node.right = rightNode;
+                        ret.add(node);
+                        if (i != (n - 1) / 2) {
+                            TreeNode node1 = new TreeNode(0);
+                            node1.left = rightNode;
+                            node1.right = leftNode;
+                            ret.add(node1);
+                        }
+                    }
+                }
+            }
+        }
+        return ret;
+    }
+
+    /**
+     * 701.Insert into a Binary Search Tree
+     * Given the root node of a binary search tree (BST) and a value to be inserted into the tree, insert the value into the BST. Return the root node of the BST after the insertion. It is guaranteed that the new value does not exist in the original BST.
+     * Note that there may exist multiple valid ways for the insertion, as long as the tree remains a BST after insertion. You can return any of them
+     */
+    public TreeNode insertIntoBST(TreeNode root, int val) {
+        if (null == root) return new TreeNode(val);
+        //分治思想
+        if (val < root.val) root.left = insertIntoBST(root.left, val);
+        else root.right = insertIntoBST(root.right, val);
+        return root;
+    }
+    //700. Search in a Binary Search Tree
+    //Given the root node of a binary search tree (BST) and a value.
+    // You need to find the node in the BST that
+    // the node's value equals the given value.
+    // Return the subtree rooted with that node.
+    // If such node doesn't exist, you should return NULL.
+    public TreeNode searchBST(TreeNode root, int val) {
         return null;
     }
     public static void main(String... args) {

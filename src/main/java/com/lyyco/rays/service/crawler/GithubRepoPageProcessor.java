@@ -69,11 +69,11 @@ public class GithubRepoPageProcessor implements PageProcessor{
         SpiderMonitor.instance().register(oschinaSpider);
 
         //配置代理
-        HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
-        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(
-                new Proxy("47.88.220.219",50001,"username","password")
-        ));
-        oschinaSpider.setDownloader(httpClientDownloader);
+//        HttpClientDownloader httpClientDownloader = new HttpClientDownloader();
+////        httpClientDownloader.setProxyProvider(SimpleProxyProvider.from(
+////                new Proxy("47.88.220.219",50001,"username","password")
+////        ));
+//        oschinaSpider.setDownloader(httpClientDownloader);
 
 
         oschinaSpider.thread(4).start();
