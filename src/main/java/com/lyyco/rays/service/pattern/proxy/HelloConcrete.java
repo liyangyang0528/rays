@@ -12,6 +12,5 @@ public class HelloConcrete {
         return "HelloConcrete:"+str;
     }
     public static void main(String...args){
-        Executor executor =
     }
 }
