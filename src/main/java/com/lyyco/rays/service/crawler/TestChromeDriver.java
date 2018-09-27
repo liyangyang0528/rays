@@ -25,7 +25,6 @@ public class TestChromeDriver {
         // 创建一个 Chrome 的浏览器实例
         return new RemoteWebDriver(service.getUrl(), DesiredCapabilities.chrome());
 	}
-	
 	public static void main(String[] args) throws IOException {
 		WebDriver driver = TestChromeDriver.getChromeDriver();
 		// 让浏览器访问 携程
