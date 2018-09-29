@@ -51,6 +51,7 @@ public class TestChromeDriver {
         });*/
         // 显示搜索结果页面的 title
         System.out.println(" Page title is: " +driver.getTitle());
+
         // 关闭浏览器
         driver.quit();
         // 关闭 ChromeDriver 接口
