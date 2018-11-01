@@ -11,5 +11,5 @@ import java.util.concurrent.ScheduledExecutorService;
  */
 public class ThreadPoolManager {
     private final ScheduledExecutorService stpe = Executors.newScheduledThreadPool(2);
-    
+
 }
