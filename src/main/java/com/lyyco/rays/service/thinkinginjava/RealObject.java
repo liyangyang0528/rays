@@ -6,11 +6,11 @@ package com.lyyco.rays.service.thinkinginjava;
 public class RealObject implements Interface{
     @Override
     public void doSomething() {
-        System.out.print("doSomething");
+        System.out.println("doSomething");
     }
 
     @Override
     public void somethingElse(String arg) {
-        System.out.print("doSomethingElse" + arg);
+        System.out.println("doSomethingElse" + arg);
     }
 }
