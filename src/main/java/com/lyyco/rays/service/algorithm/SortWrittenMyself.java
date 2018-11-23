@@ -63,10 +63,86 @@ public class SortWrittenMyself {
                     a[j - h] = tmp;
                 }
             }
-            h = h/3;
+            h = h / 3;
 
         }
 
         return a;
+    }
+
+    public int binarySearch(int[] a, int target) {
+        if (null == a) {
+            return 0;
+        }
+        int length = a.length;
+        if (length < 0) {
+            return 0;
+        }
+        int low = 0;
+        int high = length - 1;
+        while (low <= high) {
+            int index = (high - low) / 2 + low;
+            if (target == a[index]) {
+                return index;
+            }
+            if (target > a[index]) {
+                low = index + 1;
+            }
+            if (target < a[index]) {
+                high = index - 1;
+            }
+        }
+        return 0;
+    }
+    public static void rotate(int[] nums, int k) {
+        if(null == nums || nums.length <0){
+            return;
+        }
+        int low = 0;
+        int high = nums.length-1;
+        int kk = k;
+        int loww = low;
+        while(loww < kk){
+            int tmp = nums[kk];
+            nums[kk] = nums[loww];
+            nums[loww] = tmp;
+            loww++;
+            kk--;
+        }
+        int kkk = k;
+        int highh = high;
+        while(kkk+1 < highh){
+            int tmpp = nums[highh];
+            nums[highh] = nums[kkk+1];
+            nums[kkk+1] = tmpp;
+            kkk++;
+            highh--;
+        }
+        while(low < high){
+            int tmppp = nums[high];
+            nums[high] = nums[low];
+            nums[low] = tmppp;
+            low++;
+            high--;
+        }
+    }
+    public void rotateBySolution(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+    public static void main(String[]args){
+        int[] nums = {1,2,3,4,5,6,7};
+        SortWrittenMyself.rotate(nums,3);
     }
 }
