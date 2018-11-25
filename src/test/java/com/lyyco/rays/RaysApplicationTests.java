@@ -22,9 +22,13 @@ public class RaysApplicationTests {
 	}
 
 	public static void main(String...args){
-		List test = new ArrayList(4);
-		ExecutorService executor = Executors.newFixedThreadPool(4);
-		executor.execute(()->test.add(1));
+		if(true & false & false){
+			System.out.println("1111");
+		}else
+			System.out.println("0000");
+//		List test = new ArrayList(4);
+//		ExecutorService executor = Executors.newFixedThreadPool(4);
+//		executor.execute(()->test.add(1));
 	}
 
 
