@@ -12,14 +12,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
-@RunWith(SpringRunner.class)
-@SpringBootTest
 public class RaysApplicationTests {
-
-	@Test
-	public void contextLoads() {
-
-	}
 
 	public static void main(String...args){
 		if(true & false & false){
