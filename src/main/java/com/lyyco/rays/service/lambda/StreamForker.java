@@ -1,6 +1,5 @@
 package com.lyyco.rays.service.lambda;
 
-import com.google.common.collect.Lists;
 
 import java.util.*;
 import java.util.concurrent.BlockingQueue;
