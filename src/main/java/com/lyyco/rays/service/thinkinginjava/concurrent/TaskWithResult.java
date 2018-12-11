@@ -17,7 +17,9 @@ public class TaskWithResult implements Callable<String> {
 
     @Override
     public String call() throws Exception {
+
         return "result of task with result: " + id;
+
     }
 
     public static void main(String[] args) {
