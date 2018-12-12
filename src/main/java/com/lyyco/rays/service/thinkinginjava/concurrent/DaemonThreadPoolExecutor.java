@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.thinkinginjava;
+package com.lyyco.rays.service.thinkinginjava.concurrent;
 
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ThreadFactory;
