@@ -12,14 +12,17 @@ import java.util.concurrent.TimeUnit;
 public class Entrance implements Runnable{
     private static OrnamentalGarden.Count count = new OrnamentalGarden.Count();
     private static List<Entrance> entrances = new ArrayList<>();
+    //维护本地值number，代表通过某个特定入口进入的参观者的数量
     private int number = 0;
     private final int id;
+    //atomic operation on a volatile field;
     private static volatile boolean canceled = false;
     public static void cancel(){
         canceled = true;
     }
     public Entrance(int id){
         this.id = id;
+        //keep this task in a list. also prevents garbage collection of dead tasks;
         entrances.add(this);
     }
     @Override
