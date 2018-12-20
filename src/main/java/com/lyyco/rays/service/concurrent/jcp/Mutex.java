@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.concurrent;
+package com.lyyco.rays.service.concurrent.jcp;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.AbstractQueuedSynchronizer;

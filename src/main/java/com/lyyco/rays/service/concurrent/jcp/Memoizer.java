@@ -1,4 +1,4 @@
-package com.lyyco.rays.service.concurrent;
+package com.lyyco.rays.service.concurrent.jcp;
 
 import org.apache.commons.lang3.concurrent.Computable;
 
