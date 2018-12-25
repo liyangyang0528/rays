@@ -3,6 +3,7 @@ package com.lyyco.rays.service.thinkinginjava;
 import java.io.File;
 import java.io.FilenameFilter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.regex.Pattern;
 
 /**
@@ -17,6 +18,10 @@ public class DirList {
             list = path.list();
         } else {
             list = path.list(new DirFilter(args[0]));
+        }
+        Arrays.sort(list, String.CASE_INSENSITIVE_ORDER);
+        for (String dirItem : list) {
+            System.out.println(dirItem);
         }
     }
 
