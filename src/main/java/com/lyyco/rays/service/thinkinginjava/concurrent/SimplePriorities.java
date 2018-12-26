@@ -1,5 +1,8 @@
 package com.lyyco.rays.service.thinkinginjava.concurrent;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 /**
  * 线程优先级
  * Author liyangyang
@@ -28,6 +31,19 @@ public class SimplePriorities implements Runnable {
                     Thread.yield();
                 }
             }
+            System.out.println(this);
+            if(--countDown == 0)return;
         }
+    }
+
+    public static void main(String[] args) {
+        ExecutorService exec = Executors.newCachedThreadPool();
+        for(int i = 0;i<5;i++){
+            exec.execute(new SimplePriorities(Thread.MIN_PRIORITY));
+        }
+
+
+        exec.execute(new SimplePriorities(Thread.MAX_PRIORITY));
+        exec.shutdown();
     }
 }

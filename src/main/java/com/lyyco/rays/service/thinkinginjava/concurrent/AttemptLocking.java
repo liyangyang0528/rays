@@ -43,7 +43,9 @@ public class AttemptLocking {
         al.timed();//true --- lock is available
         //create a separate task to grab the lock
         new Thread(){
-            {setDaemon(true);}
+            {
+                setDaemon(true);
+            }
             public void run(){
                 al.lock.lock();
                 System.out.println("acquired");

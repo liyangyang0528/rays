@@ -42,6 +42,11 @@ public class LiftOff implements Runnable {
         t.start();
         System.out.println("Waiting for LiftOFF");
         for (int i = 0; i < 5; i++) {
+            //main()创建Thread对象时，它并没有捕获任何对这些对象的引用
+            //在使用普通对象时，这对垃圾回收来说是一场公平的游戏
+            //但在使用Thread时，每个Thread都注册了它自己
+            //因此确实有一个对它的引用，而且在它的任务退出其run()并死亡之前
+            //垃圾回收器无法清除它
             new Thread(new LiftOff()).start();
         }
         System.out.println("Waiting for LiftOff");
