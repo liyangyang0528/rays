@@ -28,22 +28,25 @@ public class Horse implements Runnable {
         try {
             while (!Thread.interrupted()) {
                 synchronized (this) {
+                    //produces 0 1 2
                     strides += rand.nextInt(3);
                 }
                 barrier.await();
             }
         } catch (InterruptedException e) {
-
+          //a legitimate(合法的) way to exit
         } catch (BrokenBarrierException e) {
             throw new RuntimeException(e);
         }
     }
-    public String toString(){
+
+    public String toString() {
         return "Horse " + id + " ";
     }
-    public String tracks(){
+
+    public String tracks() {
         StringBuilder s = new StringBuilder();
-        for(int i = 0;i<getStrides();i++){
+        for (int i = 0; i < getStrides(); i++) {
             s.append("*");
         }
         s.append(id);

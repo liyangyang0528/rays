@@ -44,4 +44,15 @@ public class RPCClient {
 
         }
     }
+    public void close() throws IOException {
+        connection.close();
+    }
+
+    public static void main(String[] args) throws Exception{
+        RPCClient fibRpc = new RPCClient();
+        System.out.println(" [X] Requesting fib(30)");
+        String response = fibRpc.call("20");
+        System.out.println(" [.] Got " + response);
+        fibRpc.close();
+    }
 }
