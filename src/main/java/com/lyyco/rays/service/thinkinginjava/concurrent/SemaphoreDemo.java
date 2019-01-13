@@ -19,7 +19,7 @@ public class SemaphoreDemo {
                 new Pool<Fat>(Fat.class,SIZE);
         ExecutorService exec = Executors.newCachedThreadPool();
         for(int i = 0; i<SIZE;i++){
-            exec.execute(new CheckoutTask<Fat>(pool));
+            exec.execute(new CheckoutTask<>(pool));
         }
         System.out.println("All checkout tasks created");
         List<Fat> list = new ArrayList<>();
