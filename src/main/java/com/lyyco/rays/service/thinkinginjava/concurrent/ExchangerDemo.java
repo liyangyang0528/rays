@@ -1,10 +1,10 @@
 package com.lyyco.rays.service.thinkinginjava.concurrent;
 
+import com.lyyco.rays.service.thinkinginjava.BasicGenerator;
+import com.lyyco.rays.service.thinkinginjava.Generator;
+
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Exchanger;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * TIJ  page 736 21.7.7
@@ -20,27 +20,31 @@ public class ExchangerDemo {
     static int size = 10;
     static int delay = 5;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService exec = Executors.newCachedThreadPool();
         Exchanger<List<Fat>> xc = new Exchanger<>();
-        List<Fat>
+        List<Fat>//用于互换的List
                 producerList = new CopyOnWriteArrayList<>(),
                 consumerList = new CopyOnWriteArrayList<>();
-        exec.execute(new ExchangerProducer<Fat>(xc,BasicGenerator.create(Fat.class),producerList));
-        exec.execute(new ExchangerConsumer<Fat>(xc,consumerList));
+        exec.execute(new ExchangerProducer<>(xc, BasicGenerator.create(Fat.class), producerList));
+        exec.execute(new ExchangerConsumer<>(xc, consumerList));
+        TimeUnit.SECONDS.sleep(delay);
+        exec.shutdown();
 
     }
-
+    //填充List,然后将这个满列表交换为Consumer传递给它的空列表
     static class ExchangerProducer<T> implements Runnable {
         private Generator<T> generator;
         private Exchanger<List<T>> exchanger;
         private List<T> holder;
+
         ExchangerProducer(Exchanger<List<T>> exchg,
-            Generator<T> gen, List<T> holder) {
+                          Generator<T> gen, List<T> holder) {
             exchanger = exchg;
             generator = gen;
             this.holder = holder;
         }
+
         @Override
         public void run() {
             try {
@@ -62,10 +66,12 @@ public class ExchangerDemo {
         private Exchanger<List<T>> exchanger;
         private List<T> holder;
         private volatile T value;
+
         ExchangerConsumer(Exchanger<List<T>> ex, List<T> holder) {
             exchanger = ex;
             this.holder = holder;
         }
+
         @Override
         public void run() {
             try {

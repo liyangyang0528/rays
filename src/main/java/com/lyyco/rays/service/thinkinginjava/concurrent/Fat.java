@@ -10,7 +10,7 @@ public class Fat {
     private final int id = counter++;
 
     public Fat() {
-        for (int i = 1; i < 1000; i++) {
+        for (int i = 1; i < 10; i++) {
             d += (Math.PI + Math.E) / (double) i;
         }
     }
