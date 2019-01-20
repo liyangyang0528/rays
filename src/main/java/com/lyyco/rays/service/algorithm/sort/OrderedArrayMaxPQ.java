@@ -57,7 +57,7 @@ public class OrderedArrayMaxPQ<Key extends Comparable<Key>> {
     }
 
     /***************************************************************************
-     * Test routine.
+     * FutureTest routine.
      ***************************************************************************/
     public static void main(String[] args) {
         OrderedArrayMaxPQ<String> pq = new OrderedArrayMaxPQ<String>(10);

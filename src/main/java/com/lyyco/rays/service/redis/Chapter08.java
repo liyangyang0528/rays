@@ -41,8 +41,8 @@ public class Chapter08 {
     public void testCreateUserAndStatus(Jedis conn) {
         System.out.println("\n----- testCreateUserAndStatus -----");
 
-        assert createUser(conn, "TestUser", "Test User") == 1;
-        assert createUser(conn, "TestUser", "Test User2") == -1;
+        assert createUser(conn, "TestUser", "FutureTest User") == 1;
+        assert createUser(conn, "TestUser", "FutureTest User2") == -1;
 
         assert createStatus(conn, 1, "This is a new status message") == 1;
         assert "1".equals(conn.hget("user:1", "posts"));
@@ -51,8 +51,8 @@ public class Chapter08 {
     public void testFollowUnfollowUser(Jedis conn) {
         System.out.println("\n----- testFollowUnfollowUser -----");
 
-        assert createUser(conn, "TestUser", "Test User") == 1;
-        assert createUser(conn, "TestUser2", "Test User2") == 2;
+        assert createUser(conn, "TestUser", "FutureTest User") == 1;
+        assert createUser(conn, "TestUser2", "FutureTest User2") == 2;
 
         assert followUser(conn, 1, 2);
         assert conn.zcard("followers:2") == 1;
@@ -81,8 +81,8 @@ public class Chapter08 {
     {
         System.out.println("\n----- testSyndicateStatus -----");
 
-        assert createUser(conn, "TestUser", "Test User") == 1;
-        assert createUser(conn, "TestUser2", "Test User2") == 2;
+        assert createUser(conn, "TestUser", "FutureTest User") == 1;
+        assert createUser(conn, "TestUser2", "FutureTest User2") == 2;
 
         assert followUser(conn, 1, 2);
         assert conn.zcard("followers:2") == 1;
@@ -91,7 +91,7 @@ public class Chapter08 {
         assert getStatusMessages(conn, 1).size() == 1;
 
         for(int i = 3; i < 11; i++) {
-            assert createUser(conn, "TestUser" + i, "Test User" + i) == i;
+            assert createUser(conn, "TestUser" + i, "FutureTest User" + i) == i;
             followUser(conn, i, 2);
         }
 
@@ -110,9 +110,9 @@ public class Chapter08 {
     {
         System.out.println("\n----- testRefillTimeline -----");
 
-        assert createUser(conn, "TestUser", "Test User") == 1;
-        assert createUser(conn, "TestUser2", "Test User2") == 2;
-        assert createUser(conn, "TestUser3", "Test User3") == 3;
+        assert createUser(conn, "TestUser", "FutureTest User") == 1;
+        assert createUser(conn, "TestUser2", "FutureTest User2") == 2;
+        assert createUser(conn, "TestUser3", "FutureTest User3") == 3;
 
         assert followUser(conn, 1, 2);
         assert followUser(conn, 1, 3);
