@@ -5,7 +5,7 @@ package com.lyyco.rays.service.thinkinginjava;
  * 无论创建多少个对象，静态数据只占用一份存储区域
  *
  * 初始化的顺序是先静态对象（如果它们尚未因前面的对象创建过程而被初始化）而后是“非静态”对象
- * 
+ *
  * Author liyangyang
  * 2019/1/23
  */

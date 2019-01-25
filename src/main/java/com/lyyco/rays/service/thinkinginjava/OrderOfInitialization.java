@@ -1,5 +1,7 @@
 package com.lyyco.rays.service.thinkinginjava;
 
+
+
 /**
  * 初始化顺序
  * 在类的内部，变量定义的先后顺序决定了初始化的顺序
