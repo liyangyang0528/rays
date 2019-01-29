@@ -1,5 +1,7 @@
 package com.lyyco.rays.service.leetcode;
 
+import java.util.PriorityQueue;
+
 /**
  * Author liyangyang
  * 2018/10/15
@@ -26,5 +28,6 @@ public class ArraySolution {
     public static void main(String...args){
         int[] A = {3,1,2,4};
         ArraySolution.sortArrayByParity(A);
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
     }
 }
