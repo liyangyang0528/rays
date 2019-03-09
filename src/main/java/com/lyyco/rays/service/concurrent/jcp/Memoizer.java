@@ -2,6 +2,7 @@ package com.lyyco.rays.service.concurrent.jcp;
 
 import org.apache.commons.lang3.concurrent.Computable;
 
+import java.util.Vector;
 import java.util.concurrent.*;
 
 /**

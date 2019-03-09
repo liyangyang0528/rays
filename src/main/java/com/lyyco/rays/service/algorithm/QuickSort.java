@@ -1,6 +1,6 @@
 package com.lyyco.rays.service.algorithm;
 
-import edu.princeton.cs.algs4.StdRandom;
+//import edu.princeton.cs.algs4.StdRandom;
 
 /**
  * 快速排序
@@ -36,11 +36,13 @@ public class QuickSort {
         Comparable v = a[lo];//partitioning item
         while (true) {
             //find item on left to swap
-            while (less(a[++i], v))
+            while (less(a[++i], v)) {
                 if (i == hi) break;
+            }
             //find item on right to swap
-            while (less(v, a[--j]))
+            while (less(v, a[--j])) {
                 if (j == lo) break;
+            }
             //check if pointers cross swap
             if (i >= j) break;
             //当扫描索引交叉时，为完成分区过程需要做的所有事情是将分区项a [lo]与左子阵列（a [j]）的最右边的项交换并返回其索引j

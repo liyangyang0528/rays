@@ -21,6 +21,7 @@ public class BlockedMutex {
     public void f(){
         try{
             //this will never be available to a second task
+            //可以响应中断的获取锁操作
             lock.lockInterruptibly();
         }catch (InterruptedException e){
             System.out.println("Interrupted from lock acquisition in f()");

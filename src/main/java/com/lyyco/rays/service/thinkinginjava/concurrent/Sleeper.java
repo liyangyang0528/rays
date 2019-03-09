@@ -40,11 +40,12 @@ public class Sleeper extends Thread{
             try {
                 //在sleeper对象上调用join()方法来等待sleeper醒来
                 //如果Sleeper被中断或者正常结束,Joiner将和Sleeper一同结束
+                System.out.println("调用Join:" + sleeper.getName());
                 sleeper.join();
             } catch (InterruptedException e) {
                 System.out.println("Interrupted ");
             }
-            System.out.println(getName() + "join completed ");
+            System.out.println(getName() + " join completed ");
         }
     }
 
@@ -55,8 +56,8 @@ public class Sleeper extends Thread{
                 sleeper = new Sleeper("Sleepy_Sleeper",15000),
                 grumpy = new Sleeper("Grumpy_Sleeper",15000);
         Joiner
-                dopey = new Joiner("Dopey_Joiner",sleeper),
-                doc = new Joiner("Doc_Joiner",grumpy);
+                dopey = new Joiner("Sleepy_Joiner",sleeper),
+                doc = new Joiner("Grumpy_Joiner",grumpy);
         grumpy.interrupt();
     }
 }

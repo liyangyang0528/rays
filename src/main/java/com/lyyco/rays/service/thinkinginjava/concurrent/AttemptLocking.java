@@ -12,6 +12,17 @@ import java.util.concurrent.locks.ReentrantLock;
 public class AttemptLocking {
     private ReentrantLock lock = new ReentrantLock();
     public void untimed(){
+        /*
+        就算锁是公平锁，tryLock()仍然不是公平的
+        只要锁能够被获取，不管是否有其他线程在等待，当前线程都会获得锁
+        如果想继承锁的公平性，
+        使用tryLock(long, TimeUnit) tryLock(0, TimeUnit.SECONDS)
+        如果想在等待时间内允许不公平获取，则可以结合两种方法
+        if (lock.tryLock() ||
+          lock.tryLock(timeout, unit)) {
+        ...
+        }}
+         */
         boolean captured = lock.tryLock();
         try {
             System.out.println("tryLock():" + captured);
