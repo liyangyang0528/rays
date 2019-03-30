@@ -2,6 +2,7 @@ package com.lyyco.rays.service.thinkinginjava;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Created by lyyco on 2018/11/21.
